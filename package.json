@@ -1,0 +1,11 @@
+{
+  "name": "pokenet",
+  "version": "1.0.0",
+  "description": "Um projeto que tem como principio criar listas de reide de PokemonGO.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Klausner Augusto",
+  "license": "ISC"
+}
