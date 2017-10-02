@@ -6,5 +6,6 @@ interface IPokemonGym extends mongoose.Document{
     combatPower: number;
     latitude: Number;
     longitude: Number;
+    timeToClose: Date;
 }
 export = IPokemonGym;

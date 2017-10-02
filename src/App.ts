@@ -2,7 +2,7 @@ import * as path from 'path';
 import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
-import TrainnerRouter from './routes/TrainnerRouter';
+import ListRouter from './routes/ListRouter';
 
 class App{
     public express : express.Application;
@@ -20,7 +20,7 @@ class App{
     }
 
     private routes() : void {
-        this.express.use('/api/trainners', TrainnerRouter);
+        this.express.use('/api/listraid', ListRouter);
     }
 }
 
