@@ -4,18 +4,28 @@
   "description": "Um projeto que tem como principio criar listas de reide de PokemonGO.",
   "main": "index.js",
   "scripts": {
+    "start": "node ./dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Klausner Augusto",
   "license": "ISC",
   "devDependencies": {
+    "@types/body-parser": "^1.16.5",
+    "@types/debug": "0.0.30",
     "@types/express": "^4.0.37",
     "@types/mongoose": "^4.7.23",
+    "@types/morgan": "^1.7.33",
+    "debug": "^3.1.0",
     "gulp": "^3.9.1",
+    "gulp-typescript": "^3.2.2",
+    "gulp-watch": "^4.3.11",
+    "http": "0.0.0",
     "typescript": "^2.5.3"
   },
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.1",
-    "mongoose": "^4.11.14"
+    "mongoose": "^4.11.14",
+    "morgan": "^1.9.0"
   }
 }
