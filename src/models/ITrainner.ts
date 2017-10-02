@@ -1,14 +1,9 @@
 import * as mongoose from 'mongoose';
-
-enum Team{
-    Mystic = 1,
-    Instinct = 2,
-    Valor = 3
-};
+import EnumTeam = require('../enums/EnumTeam');
 
 interface ITrainner extends mongoose.Document{
     name: String;
-    team: Team;
+    team: EnumTeam;
     level: number;
 }
 
