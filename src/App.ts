@@ -2,6 +2,7 @@ import * as path from 'path';
 import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
+import TrainnerRouter from './routes/TrainnerRouter';
 
 class App{
     public express : express.Application;
@@ -19,14 +20,7 @@ class App{
     }
 
     private routes() : void {
-        let router = express.Router();
-        router.get('/', (req, res, next) => {
-            res.json({
-                message: 'Hello World'
-            });
-        });
-
-        this.express.use('/', router);
+        this.express.use('/api/trainners', TrainnerRouter);
     }
 }
 
