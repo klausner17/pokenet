@@ -9,7 +9,20 @@ class ListRaidController{
 
     getListRaidById(req: Request, res: Response, next: NextFunction) : void {
         let id = req.params.id;
-        listRaidService.getTrainner(id, res);
+        listRaidService.getListRaid(id, res);
+    }
+
+    createListRaid(req: Request, res: Response, next: NextFunction) : void {
+        let listRaid = {
+            pokemonGym: req.body.pokemonGym,
+            meetingTime: req.body.meetingTime,
+            maxTrainners: req.body.maxTrainners,
+        }
+        listRaidService.createListRaid(listRaid, res);
+    }
+
+    insertTrainner(req: Request, res: Response, next: NextFunction) :void {
+
     }
 
 }
