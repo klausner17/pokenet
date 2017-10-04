@@ -1,0 +1,140 @@
+{
+    "oneStar":{
+        "magikarp":{
+            "type":["water"],
+            "cp": 1165
+        },
+        "bayleef":{
+            "type":["water"],
+            "cp": 4375
+        },
+        "quilava":{
+            "type":["water"],
+            "cp": 5085
+        },
+        "croconow":{
+            "type":["water"],
+            "cp": 5270
+        }
+    },
+    "twoStars":{
+        "mulk":{
+            "type":["water"],
+            "cp": 12269
+        },
+        "electabuzz":{
+            "type":["water"],
+            "cp": 12390
+        },
+        "weezing":{
+            "type":["water"],
+            "cp": 12318
+        },
+        "magmar":{
+            "type":["water"],
+            "cp": 12718
+        },
+        "exeggutor":{
+            "type":["water"],
+            "cp": 13839
+        }
+    },
+    "threeStars":{
+        "vaporeon":{
+            "type":["water"],
+            "cp": 16696
+        },
+        "arcanine":{
+            "type":["water"],
+            "cp": 17832
+        },
+        "machamp":{
+            "type":["water"],
+            "cp": 18144
+        },
+        "gengar":{
+            "type":["water"],
+            "cp": 19768
+        },
+        "jolteon":{
+            "type":["water"],
+            "cp": 19883
+        },
+        "flareon":{
+            "type":["water"],
+            "cp": 21155
+        },
+        "alakazam":{
+            "type":["water"],
+            "cp": 22646
+        }
+    },
+    "fourStars":{
+        "lapras":{
+            "type":["water"],
+            "cp": 21768
+        },
+        "blastoise":{
+            "type":["water"],
+            "cp": 24162
+        },        
+        "snorlax":{
+            "type":["water"],
+            "cp": 25419
+        },
+        "venusaur":{
+            "type":["water"],
+            "cp": 26921
+        },
+        "charizard":{
+            "type":["water"],
+            "cp": 28485
+        },
+        "rhydon":{
+            "type":["water"],
+            "cp": 30512
+        },
+        "tyranitar":{
+            "type":["water"],
+            "cp": 34707
+        }
+    },
+    "fiveStars":{
+        "articuno":{
+            "type":["water"],
+            "cp": 30512
+        },
+        "zapdos":{
+            "type":["water"],
+            "cp": 30512
+        },
+        "moltres":{
+            "type":["water"],
+            "cp": 30512
+        },
+        "mewtwo":{
+            "type":["water"],
+            "cp": 30512
+        },
+        "raikou":{
+            "type":["water"],
+            "cp": 30512
+        },
+        "entei":{
+            "type":["water"],
+            "cp": 30512
+        },
+        "suicune":{
+            "type":["water"],
+            "cp": 30512
+        },
+        "lugia":{
+            "type":["water"],
+            "cp": 30512
+        },
+        "ho-oh":{
+            "type":["water"],
+            "cp": 30512
+        }
+    }
+}

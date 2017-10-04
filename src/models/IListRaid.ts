@@ -1,12 +1,13 @@
 import * as mongoose from 'mongoose';
-import IPokemonGym = require('./IPokemonGym')
-import ITrainner = require('./ITrainner')
 import { Schema } from 'mongoose';
+import ITrainner = require ('./ITrainner');
 
 interface IListRaid extends mongoose.Document{
-    pokemonGym: IPokemonGym;
+    gym: Schema.Types.ObjectId;
+    pokemon: String;
+    timeToClose: Date;
     meetingTime: Date;
-    trainners: Schema.Types.ObjectId[];
+    trainners: Array<ITrainner>;
     maxTrainners: Number;
 }
 

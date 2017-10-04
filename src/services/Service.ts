@@ -1,6 +1,6 @@
 import {Response} from 'express';
 
-export abstract class Service{
+export abstract class Service {
     
     validateResults(err: any, result: any, res: Response, callback: Function){
         if (err){
