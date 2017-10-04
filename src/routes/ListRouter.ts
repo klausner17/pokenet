@@ -13,7 +13,7 @@ class ListRouter{
     init() : void {
         this.router.get('/:id', listRaidController.getListRaidById);
         this.router.post('/', listRaidController.createListRaid);
-        this.router.post('/:id/trainner', listRaidController.insertTrainner);
+        this.router.put('/addTrainner/:id', listRaidController.insertTrainner);
     }
 }
 

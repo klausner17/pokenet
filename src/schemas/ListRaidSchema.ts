@@ -4,7 +4,7 @@ import IListRaid = require('../models/IListRaid');
 var listRaidSchema = new mongoose.Schema({
     pokemonGym: {type: mongoose.SchemaTypes.ObjectId, required: true}
     , meetingTime: {type: mongoose.SchemaTypes.Date, require: true}
-    , trainners: {type:[mongoose.SchemaTypes.ObjectId}
+    , trainners: {type:[mongoose.SchemaTypes.ObjectId], unique: true}
     , maxTrainners: {type: Number, required: true, default: 20, max:20}
 });
 

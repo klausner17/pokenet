@@ -4,7 +4,7 @@ import EnumTeam = require('../enums/EnumTeam');
 
 var trainnerSchema = new mongoose.Schema({
     name: {
-        type: String, required: true
+        type: String, required: true, unique: true
     },
     team: {
         type: EnumTeam, required: true
