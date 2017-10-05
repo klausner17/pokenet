@@ -5,11 +5,11 @@
             "cp": 1165
         },
         "bayleef":{
-            "type":["water"],
+            "type":["grass"],
             "cp": 4375
         },
         "quilava":{
-            "type":["water"],
+            "type":["fire"],
             "cp": 5085
         },
         "croconow":{
@@ -19,23 +19,23 @@
     },
     "twoStars":{
         "mulk":{
-            "type":["water"],
+            "type":["poison"],
             "cp": 12269
         },
         "electabuzz":{
-            "type":["water"],
+            "type":["eletric"],
             "cp": 12390
         },
         "weezing":{
-            "type":["water"],
+            "type":["poison"],
             "cp": 12318
         },
         "magmar":{
-            "type":["water"],
+            "type":["fire"],
             "cp": 12718
         },
         "exeggutor":{
-            "type":["water"],
+            "type":["grass", "psychic"],
             "cp": 13839
         }
     },
@@ -45,33 +45,33 @@
             "cp": 16696
         },
         "arcanine":{
-            "type":["water"],
+            "type":["fire"],
             "cp": 17832
         },
         "machamp":{
-            "type":["water"],
+            "type":["fighting"],
             "cp": 18144
         },
         "gengar":{
-            "type":["water"],
+            "type":["ghost","poison"],
             "cp": 19768
         },
         "jolteon":{
-            "type":["water"],
+            "type":["eletric"],
             "cp": 19883
         },
         "flareon":{
-            "type":["water"],
+            "type":["fire"],
             "cp": 21155
         },
         "alakazam":{
-            "type":["water"],
+            "type":["psychic"],
             "cp": 22646
         }
     },
     "fourStars":{
         "lapras":{
-            "type":["water"],
+            "type":["water", "ice"],
             "cp": 21768
         },
         "blastoise":{
@@ -79,62 +79,62 @@
             "cp": 24162
         },        
         "snorlax":{
-            "type":["water"],
+            "type":["normal"],
             "cp": 25419
         },
         "venusaur":{
-            "type":["water"],
+            "type":["gras", "poison"],
             "cp": 26921
         },
         "charizard":{
-            "type":["water"],
+            "type":["fire", "flying"],
             "cp": 28485
         },
         "rhydon":{
-            "type":["water"],
+            "type":["ground", "rock"],
             "cp": 30512
         },
         "tyranitar":{
-            "type":["water"],
+            "type":["rock", "dark"],
             "cp": 34707
         }
     },
     "fiveStars":{
         "articuno":{
-            "type":["water"],
-            "cp": 30512
+            "type":["ice", "flying"],
+            "cp": 37603
         },
         "zapdos":{
-            "type":["water"],
-            "cp": 30512
+            "type":["eletric", "flying"],
+            "cp": 42961
         },
         "moltres":{
-            "type":["water"],
-            "cp": 30512
+            "type":["fire", "flying"],
+            "cp": 41953
         },
         "mewtwo":{
-            "type":["water"],
-            "cp": 30512
+            "type":["psychic"],
+            "cp": 49430
         },
         "raikou":{
-            "type":["water"],
-            "cp": 30512
+            "type":["eletric"],
+            "cp": 42932
         },
         "entei":{
-            "type":["water"],
-            "cp": 30512
+            "type":["fire"],
+            "cp": 38628
         },
         "suicune":{
             "type":["water"],
-            "cp": 30512
+            "cp": 34471
         },
         "lugia":{
-            "type":["water"],
-            "cp": 30512
+            "type":["psychic", "flying"],
+            "cp": 42753
         },
         "ho-oh":{
-            "type":["water"],
-            "cp": 30512
+            "type":["fire", "flying"],
+            "cp": 55251
         }
     }
 }
