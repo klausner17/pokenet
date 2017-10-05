@@ -3,7 +3,7 @@ import { Schema } from 'mongoose';
 import ITrainner = require ('./ITrainner');
 
 interface IListRaid extends mongoose.Document{
-    gym: Schema.Types.ObjectId;
+    gym: String;
     pokemon: String;
     timeToClose: Date;
     meetingTime: Date;

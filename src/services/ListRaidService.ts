@@ -2,6 +2,8 @@ import listRaidSchema = require('../schemas/ListRaidSchema');
 import * as mongoose from 'mongoose';
 import {Response} from 'express';
 import {Service} from './Service';
+import ITrainner = require('../models/ITrainner');
+import IListRaid = require('../models/IListRaid');
 
 class ListRaidService extends Service{
     
@@ -21,18 +23,17 @@ class ListRaidService extends Service{
         });
     }
 
-    insertTrainnerListRaid(listRaidId: any, trainnerId: any, res: Response) : void {
-        console.log(listRaidId + ' - ' + trainnerId);
+    insertTrainnerListRaid(listRaidId: any, trainner: ITrainner, res: Response) : void {
         listRaidSchema.findById (listRaidId, (err, result) => {
             this.validateResults(err, result, res, () => {
                 //Verifica se já existe esse trainner na lista
                 let found : boolean = false;
                 result.trainners.forEach(element => {
-                    found = element == trainnerId;
+                    found = element.name == trainner.name;
                 });
                 //Se não existir, adiciona o treinador.
                 if (!found){
-                    result.trainners.push(trainnerId);
+                    result.trainners.push(trainner);
                     result.update(result, (err, raw) => {
                         res.status(200).json({message: "ListRaid updated."});
                     });

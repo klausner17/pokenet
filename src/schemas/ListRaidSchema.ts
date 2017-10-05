@@ -2,9 +2,11 @@ import * as mongoose from 'mongoose';
 import IListRaid = require('../models/IListRaid');
 
 var listRaidSchema = new mongoose.Schema({
-    pokemonGym: {type: mongoose.SchemaTypes.ObjectId, required: true}
+    gym: {type: String, required: true}
+    , pokemon: {type: String, required: true}
     , meetingTime: {type: mongoose.SchemaTypes.Date, require: true}
-    , trainners: {type:[mongoose.SchemaTypes.ObjectId], unique: true}
+    , timeToClose: {type: mongoose.SchemaTypes.Date, require: true}
+    , trainners: {type: mongoose.SchemaTypes.Array, unique: true}
     , maxTrainners: {type: Number, required: true, default: 20, max:20}
 });
 
