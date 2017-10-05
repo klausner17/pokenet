@@ -1,0 +1,26 @@
+{
+    "biblioteca":{
+        "name": "Biblioteca Municipal",
+        "coordinates": ["-22.0082021", "-47.9233106"]
+    },
+    "catedral":{
+        "name": "Catedral",
+        "coordinates": ["-22.0082021", "-47.923458"]
+    },
+    "germanofehr":{
+        "name": "Estátua Germano Fehr",
+        "coordinates": ["-22.0088931", "-47.9219295"]
+    },
+    "cdcc":{
+        "name": "CDCC",
+        "coordinates": ["-22.0088463", "-47.9239413"]
+    },
+    "fonteIgreja":{
+        "name": "Fonte da Igreja",
+        "coordinates": ["-22.0104209", "-47.9239088"]
+    },
+    "teatro":{
+        "name": "Fonte da Igreja",
+        "coordinates": ["-22.0082021", "-47.9249077"]
+    }
+}
