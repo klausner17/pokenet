@@ -23,7 +23,7 @@ class ListRaidService extends Service{
         });
     }
 
-    insertTrainnerListRaid(listRaidId: any, trainner: ITrainner, res: Response) : void {
+    insertTrainnerListRaid(listRaidId: any, trainner: any, res: Response) : void {
         listRaidSchema.findById (listRaidId, (err, result) => {
             this.validateResults(err, result, res, () => {
                 //Verifica se já existe esse trainner na lista

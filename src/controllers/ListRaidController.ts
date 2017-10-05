@@ -17,17 +17,14 @@ class ListRaidController{
     createListRaid(req: Request, res: Response, next: NextFunction) : void {
         let listRaid : {};
         listRaid = req.body.listRaid;
-        // listRaid.gym = req.body.gym;
-        // listRaid.pokemon = req.body.pokemon;
-        // listRaid.timeToClose = req.body.timeToClose;
-        // listRaid.meetingTime = req.body.meetingTime;
-        // listRaid.maxTrainners = req.body.maxTrainners;
         listRaidService.createListRaid(listRaid, res);
     }
 
     insertTrainner(req: Request, res: Response, next: NextFunction) :void {
-        let trainner: ITrainner;
-        trainner = req.body.trainner;
+        let trainner = {
+            name: req.body.name,
+            level: req.body.level
+        };
         let listRaidId = req.params.id;
         listRaidService.insertTrainnerListRaid(listRaidId, trainner, res);
     }

@@ -6,7 +6,7 @@ var listRaidSchema = new mongoose.Schema({
     , pokemon: {type: String, required: true}
     , meetingTime: {type: mongoose.SchemaTypes.Date, require: true}
     , timeToClose: {type: mongoose.SchemaTypes.Date, require: true}
-    , trainners: {type: mongoose.SchemaTypes.Array, unique: true}
+    , trainners: {type: Array}
     , maxTrainners: {type: Number, required: true, default: 20, max:20}
 });
 
