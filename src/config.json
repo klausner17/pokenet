@@ -1,0 +1,17 @@
+{
+  "database": {
+    "host": "localhost",
+    "dialect": "mysql",
+    "user": "root",
+    "password": "root",
+    "database": "pokenet",
+    "port": 3306,
+    "pool": {
+      "max": 5,
+      "min": 0,
+      "acquire": 30000,
+      "idle": 10000
+    },
+    "operatorAliases": false
+  }
+}

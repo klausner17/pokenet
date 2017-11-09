@@ -2,41 +2,47 @@ import * as path from 'path';
 import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
-import * as mongoose from 'mongoose'
-import ListRouter from './routes/ListRouter';
-const config = require("./app.json");
+import { Sequelize } from 'sequelize-typescript';
+import * as fs from 'fs';
 
 class App{
+
+    config  = require("./config.json");
 
     public express : express.Application;
 
     constructor(){
         this.express = express();
-        this.middleware();
+        this.middlewares();
         this.routes();
-        this.mongoConnect();
+        this.databaseConnect();
     }
 
-    private middleware() : void {
+    private middlewares() : void {
         this.express.use(logger('dev'));
         this.express.use(bodyParser.json());
         this.express.use(bodyParser.urlencoded({extended: false}));
     }
 
     private routes() : void {
-        this.express.use('/api/listraid', ListRouter);
+
     }
 
-    private mongoConnect(){
-        let db = config.connectionMongo.database;
-        let server =  config.connectionMongo.server;
-        let port = config.connectionMongo.port;
-        let conectionString : string = 'mongodb://' + server + ':' + port + '/' + db;
-        mongoose.connect(conectionString, (err) => {
-            if(err) console.log("Erro ao conectar a instancia. Erro" + err);
-            else console.log("Conectado ao banco.");
+    private databaseConnect(){
+        let dbConf = this.config['database'];
+        let sequelize = new Sequelize({
+            database: dbConf['database'],
+            username: dbConf['user'],
+            password: dbConf['password'],
+            dialect: dbConf['dialect'],
+            port: dbConf['port'],
+            modelPaths: [__dirname + '/models']
         });
+
+        sequelize.sync();
     }
 }
 
-export default new App().express;
+var app = new App();
+
+export default app.express;
