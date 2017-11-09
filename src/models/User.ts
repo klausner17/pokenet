@@ -1,4 +1,4 @@
-import { Table, Column, Model, HasMany, CreatedAt, UpdatedAt } from "sequelize-typescript";
+import { Table, Column, Model, HasMany, CreatedAt, UpdatedAt, AfterSave, BeforeCreate } from "sequelize-typescript";
 import { Trainner } from "./Trainner";
 import * as bcrypt from "bcrypt"
 
@@ -11,11 +11,7 @@ export class User extends Model<User> {
     email: string;
 
     @Column
-    set password(value: string) {
-        if(!this.isNewRecord || !bcrypt.compare(this.password, value)) {
-            this.password = bcrypt.hashSync(this.password, 10);
-        }
-    }
+    password:string;
 
     @HasMany(() => Trainner)
     trainners: Trainner[];
@@ -25,4 +21,11 @@ export class User extends Model<User> {
 
     @UpdatedAt
     updatedAt: Date;
+
+    @BeforeCreate
+    static hashPassword(instance: User){
+        console.log(instance);
+        let salt = bcrypt.genSaltSync();
+        instance.password = bcrypt.hashSync(instance.password, salt);
+    }
 }

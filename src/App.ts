@@ -1,3 +1,4 @@
+import { User } from './models/User';
 import * as path from 'path';
 import * as express from 'express';
 import * as logger from 'morgan';
@@ -38,8 +39,15 @@ class App{
             port: dbConf['port'],
             modelPaths: [__dirname + '/models']
         });
-
-        sequelize.sync();
+        sequelize.sync()
+          .then(() => {
+            let user = new User(<User>{
+                name: 'klausner',
+                email: 'klausner@mail.com',
+                password: '12345'
+            })
+            user.save();
+          });
     }
 }
 
