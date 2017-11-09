@@ -1,12 +1,15 @@
+import { NextFunction } from 'express';
 import { User } from './models/User';
-import * as path from 'path';
-import * as express from 'express';
-import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 import { Sequelize } from 'sequelize-typescript';
-import * as fs from 'fs';
+import * as express from 'express';
+import { Request, Response } from 'express';
+import { default_type } from 'mime';
+import * as consign from 'consign';
+import { Errors } from 'sequelize-typescript/node_modules/@types/sequelize';
+import { Router } from 'express-serve-static-core';
 
-class App{
+class App {
 
     config  = require("./config.json");
 
@@ -20,13 +23,29 @@ class App{
     }
 
     private middlewares() : void {
-        this.express.use(logger('dev'));
         this.express.use(bodyParser.json());
         this.express.use(bodyParser.urlencoded({extended: false}));
     }
 
     private routes() : void {
-
+        this.express.route('/')
+          .get((req: Request, res: Response) => {
+            res.status(200).json({status: "Hello world - Pokenet API"});
+          });
+        this.express.route('/user')
+          .all((req: Request, res: Response, next: NextFunction) => {
+            delete req.body.id;
+            next();
+          })
+          .post((req: Request, res: Response) => {
+              User.create(req.body)
+                .then(result => {
+                   res.status(200).json(result); 
+                })
+                .catch(error => {
+                    res.status(402).json({msg: "internal error"});
+                });
+          });
     }
 
     private databaseConnect(){
@@ -39,18 +58,10 @@ class App{
             port: dbConf['port'],
             modelPaths: [__dirname + '/models']
         });
-        sequelize.sync()
-          .then(() => {
-            let user = new User(<User>{
-                name: 'klausner',
-                email: 'klausner@mail.com',
-                password: '12345'
-            })
-            user.save();
-          });
+        sequelize.sync();
     }
 }
 
 var app = new App();
 
-export default app.express;
+export default app;
