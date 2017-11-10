@@ -28,24 +28,7 @@ class App {
     }
 
     private routes() : void {
-        this.express.route('/')
-          .get((req: Request, res: Response) => {
-            res.status(200).json({status: "Hello world - Pokenet API"});
-          });
-        this.express.route('/user')
-          .all((req: Request, res: Response, next: NextFunction) => {
-            delete req.body.id;
-            next();
-          })
-          .post((req: Request, res: Response) => {
-              User.create(req.body)
-                .then(result => {
-                   res.status(200).json(result); 
-                })
-                .catch(error => {
-                    res.status(402).json({msg: "internal error"});
-                });
-          });
+        
     }
 
     private databaseConnect(){

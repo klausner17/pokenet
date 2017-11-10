@@ -1,16 +1,16 @@
-import { Table, Column, Model, HasMany, CreatedAt, UpdatedAt, AfterSave, BeforeCreate } from "sequelize-typescript";
+import { Table, Column, Model, HasMany, CreatedAt, UpdatedAt, AfterSave, BeforeCreate, Unique } from 'sequelize-typescript';
 import { Trainner } from "./Trainner";
 import * as bcrypt from "bcrypt"
 
 @Table
 export class User extends Model<User> {
-    @Column
+    @Column({ allowNull: false})
     name: string;
 
-    @Column
+    @Column({unique: true, allowNull: false})
     email: string;
 
-    @Column
+    @Column({ allowNull: false})    
     password:string;
 
     @HasMany(() => Trainner)
