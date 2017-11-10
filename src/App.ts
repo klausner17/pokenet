@@ -5,6 +5,8 @@ import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 import { Sequelize } from 'sequelize-typescript';
 import * as fs from 'fs';
+import indexRoutes from './routes/index';
+import userRoutes from './routes/user';
 
 class App{
 
@@ -26,7 +28,8 @@ class App{
     }
 
     private routes() : void {
-
+        this.express.use(indexRoutes);
+        this.express.use(userRoutes);
     }
 
     private databaseConnect(){
