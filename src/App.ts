@@ -7,6 +7,7 @@ import { Sequelize } from 'sequelize-typescript';
 import * as fs from 'fs';
 import indexRoutes from './routes/index';
 import userRoutes from './routes/user';
+import auth from './middlewares/authentication';
 
 class App {
 
@@ -25,6 +26,7 @@ class App {
         this.express.use(logger('dev'));
         this.express.use(bodyParser.json());
         this.express.use(bodyParser.urlencoded({extended: false}));
+        this.express.use(auth.initialize());
     }
 
     private routes() : void {
