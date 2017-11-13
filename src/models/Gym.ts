@@ -10,10 +10,10 @@ export class Gym extends Model<Gym> {
     name: string;
     
     @Column
-    latitude: number;
+    latitude: string;
 
     @Column
-    longitude: number;
+    longitude: string;
 
     @HasMany(() => PokemonGym)
     pokemonGym: PokemonGym[];

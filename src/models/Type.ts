@@ -3,8 +3,8 @@ import { Model, Table } from 'sequelize-typescript';
 
 @Table
 export class Type extends Model<Type> {
-    @Column
     @Unique
+    @Column
     type: string;
 
     @CreatedAt
