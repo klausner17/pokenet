@@ -32,6 +32,7 @@ class App {
     private routes() : void {
         this.express.use(indexRoutes);
         this.express.use(userRoutes);
+        this.express.use(tokenRouter);
     }
 
     private databaseConnect(){

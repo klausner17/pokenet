@@ -24,4 +24,6 @@ tokenRouter.post("/token", (req: Request, res: Response) => {
     } else {
         res.sendStatus(401);
     }
-})
+});
+
+export default tokenRouter;
