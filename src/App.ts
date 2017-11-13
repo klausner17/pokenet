@@ -48,4 +48,4 @@ class App{
 
 var app = new App();
 
-export default app.express;
+export default app;
