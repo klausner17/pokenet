@@ -10,7 +10,7 @@ export class User extends Model<User> {
     @Column({unique: true, allowNull: false})
     email: string;
 
-    @Column({ allowNull: false})    
+    @Column({ allowNull: false})
     password:string;
 
     @HasMany(() => Trainner)
@@ -27,5 +27,9 @@ export class User extends Model<User> {
         console.log(instance);
         let salt = bcrypt.genSaltSync();
         instance.password = bcrypt.hashSync(instance.password, salt);
+    }
+
+    verifyPassword(pass: string): boolean {
+        return bcrypt.compareSync(this.password, pass);
     }
 }
