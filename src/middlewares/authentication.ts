@@ -27,8 +27,7 @@ class Authentication {
                 }
                 return done(null, false);
             })
-            .catch(err => error = err);
-        return done(error, null);
+            .catch(err => done(err, null));
     }
 
     initialize(): Handler {

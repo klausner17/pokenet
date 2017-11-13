@@ -30,6 +30,6 @@ export class User extends Model<User> {
     }
 
     verifyPassword(pass: string): boolean {
-        return bcrypt.compareSync(this.password, pass);
+        return bcrypt.compareSync(pass, this.password);
     }
 }
