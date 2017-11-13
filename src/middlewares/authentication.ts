@@ -3,7 +3,7 @@ import { User } from '../models/User';
 import * as passport from 'passport';
 
 
-class AuthenticateOptions {
+class Authentication {
 
     private _config = require('../config.json')['authentication'];
     strategy: Strategy;
@@ -39,3 +39,6 @@ class AuthenticateOptions {
         return passport.authenticate("jwt", {session: this._config['session']});
     }
 }
+
+var auth = new Authentication();
+export default auth;
