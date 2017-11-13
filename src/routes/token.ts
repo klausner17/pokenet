@@ -1,0 +1,27 @@
+import { Router, Request, Response } from 'express';
+import * as express from 'express';
+import { User } from '../models/User';
+import * as jwt from 'jwt-simple';
+const config = require('../config.json')['authentication'];
+
+
+var tokenRouter: Router = express.Router();
+
+tokenRouter.post('/token', (req: Request, res: Response) => {
+    if(req.body.email && req.body.password) {
+        let email = req.body.email;
+        let pass = req.body.password;
+        User.findOne({where: {email: email}})
+            .then((user: User) => {
+                if (user.verifyPassword(pass)){
+                    let payload = {id: user.id};
+                    res.status(200).json({token: jwt.encode(payload, config['secretKey'])})
+                } else {
+                    res.sendStatus(401);
+                }
+            })
+            .catch(error => res.sendStatus(401));
+    } else {
+        res.sendStatus(401);
+    }
+})
