@@ -1,44 +1,44 @@
-import { Strategy, StrategyOptions, ExtractJwt, VerifyCallback } from 'passport-jwt';
-import { User } from '../models/User';
-import * as passport from 'passport';
+import { Strategy, StrategyOptions, ExtractJwt, VerifyCallback, VerifiedCallback } from "passport-jwt";
+import { User } from "../models/User";
+import * as passport from "passport";
+import { Handler } from "express-serve-static-core";
 
 
 class Authentication {
 
-    private _config = require('../config.json')['authentication'];
+    private _config = require("../config.json").authentication;
     strategy: Strategy;
 
     constructor() {
         let options: StrategyOptions = {
-            secretOrKey: this._config['secretKey'],
+            secretOrKey: this._config.secretKey,
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
-        }
+        };
         this.strategy = new Strategy(options, this.verify);
         passport.use(this.strategy);
     }
 
-    verify(payload: User, done): VerifyCallback {
-        let error;
+    verify(payload: User, done: VerifiedCallback): VerifyCallback | void {
+        let error: Error;
         User.findById(payload.id)
             .then((user: User) => {
-                if (user) return done(
-                    null,
-                    {id: user.id, email: user.email}
-                )
+                if (user) {
+                    return done(null, {id: user.id, email: user.email});
+                }
                 return done(null, false);
             })
-            .catch(err => error = err)
+            .catch(err => error = err);
         return done(error, null);
     }
 
-    initialize() {
+    initialize(): Handler {
         return passport.initialize();
     }
 
-    authenticate() {
-        return passport.authenticate("jwt", {session: this._config['session']});
+    authenticate(): Handler {
+        return passport.authenticate("jwt", {session: this._config.session});
     }
 }
 
-var auth = new Authentication();
+var auth: Authentication = new Authentication();
 export default auth;
