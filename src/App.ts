@@ -1,15 +1,14 @@
-import { NextFunction } from 'express';
 import { User } from './models/User';
+import * as path from 'path';
+import * as express from 'express';
+import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 import { Sequelize } from 'sequelize-typescript';
-import * as express from 'express';
-import { Request, Response } from 'express';
-import { default_type } from 'mime';
-import * as consign from 'consign';
-import { Errors } from 'sequelize-typescript/node_modules/@types/sequelize';
-import { Router } from 'express-serve-static-core';
+import * as fs from 'fs';
+import indexRoutes from './routes/index';
+import userRoutes from './routes/user';
 
-class App {
+class App{
 
     config  = require("./config.json");
 
@@ -23,12 +22,14 @@ class App {
     }
 
     private middlewares() : void {
+        this.express.use(logger('dev'));
         this.express.use(bodyParser.json());
         this.express.use(bodyParser.urlencoded({extended: false}));
     }
 
     private routes() : void {
-        
+        this.express.use(indexRoutes);
+        this.express.use(userRoutes);
     }
 
     private databaseConnect(){
@@ -47,4 +48,4 @@ class App {
 
 var app = new App();
 
-export default app;
+export default app.express;
