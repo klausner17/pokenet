@@ -8,7 +8,7 @@ import * as fs from 'fs';
 import indexRoutes from './routes/index';
 import userRoutes from './routes/user';
 
-class App{
+class App {
 
     config  = require("./config.json");
 

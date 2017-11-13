@@ -13,5 +13,9 @@
       "idle": 10000
     },
     "operatorAliases": false
+  },
+  "authentication": {
+      "secretKey": "POKENET@123",
+      "session": false
   }
 }
