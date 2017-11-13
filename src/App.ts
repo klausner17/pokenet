@@ -8,6 +8,7 @@ import * as fs from 'fs';
 import indexRoutes from './routes/index';
 import userRoutes from './routes/user';
 import auth from './middlewares/authentication';
+import tokenRouter from './routes/token';
 
 class App {
 
