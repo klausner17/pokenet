@@ -24,20 +24,6 @@ listRaidRouter.route('/listRaids/:id')
             .catch(err => res.status(412).json({msg: err.message}));
     });
 
-listRaidRouter.route('/listRaid/:id')
-    .all(auth.authenticate())
-    .put((req: Request, res: Response) => {
-        delete req.body.id;
-        ListRaid.update(req.params.id, req.body)
-            .then(result => res.sendStatus(204))
-            .catch(err => res.status(412).json({msg: err.message}));
-    })
-    .delete((req: Request, res: Response) => {
-        ListRaid.destroy(req.params.id)
-            .then(result => res.sendStatus(204))
-            .catch(err => res.status(412).json({msg: err.message}));
-    });
-
 listRaidRouter.route('/listRaid')
     .all(auth.authenticate())
     .post((req: Request, res: Response) => {
@@ -49,5 +35,20 @@ listRaidRouter.route('/listRaid')
             })
             .catch(err => res.status(412).json({msg: err.message}));
     });
+
+listRaidRouter.route('/listRaid/:id')
+    .all(auth.authenticate())
+    .put((req: Request, res: Response) => {
+        delete req.body.id;
+        ListRaid.update(req.body, {where: {id: req.params.id, userId: req.user.id}})
+            .then(result => res.sendStatus(204))
+            .catch(err => res.status(412).json({msg: err.message}));
+    })
+    .delete((req: Request, res: Response) => {
+        ListRaid.destroy({where: {id: req.params.id, userId: req.user.id}})
+            .then(result => res.sendStatus(204))
+            .catch(err => res.status(412).json({msg: err.message}));
+    });
+
 
 export default listRaidRouter;

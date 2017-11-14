@@ -10,6 +10,7 @@ import userRoutes from './routes/user';
 import auth from './middlewares/authentication';
 import tokenRouter from './routes/token';
 import trainnerRouter from './routes/trainner';
+import listRaidRouter from './routes/listRaid';
 
 class App {
 
@@ -36,6 +37,7 @@ class App {
         this.express.use(userRoutes);
         this.express.use(tokenRouter);
         this.express.use(trainnerRouter);
+        this.express.use(listRaidRouter);
     }
 
     private databaseConnect(){
