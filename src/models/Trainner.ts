@@ -4,14 +4,15 @@ import { User } from './User';
 
 @Table
 export class Trainner extends Model<Trainner>{
-    @Column
+    
+    @Column({unique: true, allowNull: false})
     name: String;
 
-    @Column
+    @Column({allowNull: false})
     level: number;
 
     @ForeignKey(() => User)
-    @Column
+    @Column({allowNull: false})
     userId: number;
 
     @BelongsTo(() => User)

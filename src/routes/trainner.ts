@@ -8,11 +8,7 @@ var trainnerRouter: Router = express.Router();
 
 trainnerRouter
     .route('/trainner')
-    .all((req: Request, res: Response, next: NextFunction) => {
-        auth.authenticate();
-        delete req.body.userId;
-        next();
-    })
+    .all(auth.authenticate())
     .get((req: Request, res: Response) => {
         Trainner.findAll({where: {userId: req.user.id}})
             .then((trainners: Trainner[]) => {
@@ -29,12 +25,7 @@ trainnerRouter
     })
 
 trainnerRouter.route('/trainner/:id')
-    .all((req: Request, res: Response, next: NextFunction) => {
-        auth.authenticate();
-        delete req.body.userId;
-        delete req.body.id;
-        next();
-    })
+    .all(auth.authenticate())
     .get((req: Request, res: Response) => {
         Trainner.findOne({where: {id: req.params.id, userId: req.user.id}})
             .then((trainner: Trainner) => {
