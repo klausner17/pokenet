@@ -16,9 +16,6 @@ export class PokemonGym extends Model<PokemonGym> {
     @Column
     combatPower: number;
 
-    @Column 
-    level: Level;
-
     @ForeignKey(() => Pokemon)
     @Column
     pokemonId: number;
@@ -27,8 +24,8 @@ export class PokemonGym extends Model<PokemonGym> {
     pokemon = Pokemon;
 
     @CreatedAt
-    createAt: Date;
+    createdAt: Date;
 
     @UpdatedAt
-    updateAt: Date;
+    updatedAt: Date;
 }
