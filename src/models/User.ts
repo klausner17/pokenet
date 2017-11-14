@@ -1,3 +1,4 @@
+import { ListRaid } from './ListRaid';
 import { Table, Column, Model, HasMany, CreatedAt, UpdatedAt, AfterSave, BeforeCreate, Unique } from 'sequelize-typescript';
 import { Trainner } from "./Trainner";
 import * as bcrypt from "bcrypt"
@@ -15,6 +16,9 @@ export class User extends Model<User> {
 
     @HasMany(() => Trainner)
     trainners: Trainner[];
+
+    @HasMany(() => ListRaid)
+    listRaid: ListRaid[];
 
     @CreatedAt
     createdAt: Date;

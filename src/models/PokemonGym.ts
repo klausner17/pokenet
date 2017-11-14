@@ -12,6 +12,7 @@ export enum Level {
 
 @Table
 export class PokemonGym extends Model<PokemonGym> {
+    
     @Column
     combatPower: number;
 
@@ -22,15 +23,8 @@ export class PokemonGym extends Model<PokemonGym> {
     @Column
     pokemonId: number;
 
-    @ForeignKey(() => Gym)
-    @Column
-    gymId: number;
-
     @BelongsTo(() => Pokemon)
     pokemon = Pokemon;
-
-    @BelongsTo(() => Gym)
-    gym: Gym;
 
     @CreatedAt
     createAt: Date;
