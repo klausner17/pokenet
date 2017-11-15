@@ -5,14 +5,17 @@ import * as bcrypt from "bcrypt"
 
 @Table
 export class User extends Model<User> {
-    @Column({ allowNull: false})
+    @Column({ allowNull: false })
     name: string;
 
-    @Column({unique: true, allowNull: false})
+    @Column({ unique: true, allowNull: false })
     email: string;
 
-    @Column({ allowNull: false})
-    password:string;
+    @Column
+    password: string;
+
+    @Column
+    googleToken: string;
 
     @HasMany(() => Trainner)
     trainners: Trainner[];
@@ -27,10 +30,11 @@ export class User extends Model<User> {
     updatedAt: Date;
 
     @BeforeCreate
-    static hashPassword(instance: User){
-        console.log(instance);
-        let salt = bcrypt.genSaltSync();
-        instance.password = bcrypt.hashSync(instance.password, salt);
+    static hashPassword(instance: User) {
+        if (instance.password) {
+            let salt = bcrypt.genSaltSync();
+            instance.password = bcrypt.hashSync(instance.password, salt);
+        }
     }
 
     verifyPassword(pass: string): boolean {

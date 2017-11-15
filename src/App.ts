@@ -11,6 +11,7 @@ import auth from './middlewares/authentication';
 import tokenRouter from './routes/token';
 import trainnerRouter from './routes/trainner';
 import listRaidRouter from './routes/listRaid';
+import googleRouter from './routes/google';
 
 class App {
 
@@ -34,6 +35,7 @@ class App {
 
     private routes() : void {
         this.express.use(indexRoutes);
+        this.express.use(googleRouter);
         this.express.use(userRoutes);
         this.express.use(tokenRouter);
         this.express.use(trainnerRouter);
