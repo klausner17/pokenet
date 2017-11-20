@@ -12,6 +12,7 @@ import tokenRouter from './routes/token';
 import trainnerRouter from './routes/trainner';
 import listRaidRouter from './routes/listRaid';
 import googleRouter from './routes/google';
+import * as cors from 'cors';
 
 class App {
 
@@ -29,6 +30,7 @@ class App {
     private middlewares() : void {
         this.express.use(logger('dev'));
         this.express.use(bodyParser.json());
+        this.express.use(cors());
         this.express.use(bodyParser.urlencoded({extended: false}));
         this.express.use(auth.initialize());
     }
@@ -52,7 +54,7 @@ class App {
             port: dbConf['port'],
             modelPaths: [__dirname + '/models']
         });
-        sequelize.sync();
+        //sequelize.sync();
     }
 }
 

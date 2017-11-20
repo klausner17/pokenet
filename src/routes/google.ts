@@ -14,13 +14,12 @@ googleRouter.route('/auth/google')
 
 googleRouter.route('/auth/google/callback')
     .get(passport.authenticate('google' ,{
-        // successRedirect: '/google/success',
         failureRedirect: '/google/failure',
         session: false
     }),
     (req: Request, res: Response) => {
         let token = jwt.encode(req.user, config.secretKey);
-        res.status(200).json({token: token});
+        res.redirect(`http://localhost:4200/processToken?token=${token}`)
     });
 
 googleRouter.get('/google/failure', (req: Request, res: Response) => {
