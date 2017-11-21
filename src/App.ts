@@ -1,3 +1,5 @@
+import gymRouter from './routes/gym';
+import pokemonGymRouter from './routes/pokemonGym';
 import { User } from './models/User';
 import * as path from 'path';
 import * as express from 'express';
@@ -13,6 +15,7 @@ import trainnerRouter from './routes/trainner';
 import listRaidRouter from './routes/listRaid';
 import googleRouter from './routes/google';
 import * as cors from 'cors';
+import pokemonRouter from './routes/pokemon';
 
 class App {
 
@@ -42,6 +45,9 @@ class App {
         this.express.use(tokenRouter);
         this.express.use(trainnerRouter);
         this.express.use(listRaidRouter);
+        this.express.use(pokemonGymRouter);
+        this.express.use(pokemonRouter);
+        this.express.use(gymRouter);
     }
 
     private databaseConnect(){
@@ -54,7 +60,6 @@ class App {
             port: dbConf['port'],
             modelPaths: [__dirname + '/models']
         });
-        //sequelize.sync();
     }
 }
 
