@@ -2,6 +2,9 @@ import { Router, Request, Response } from 'express';
 import { ListRaid } from './../models/ListRaid';
 import * as express from 'express';
 import auth from '../middlewares/authentication';
+import { Pokemon } from '../models/Pokemon';
+import { IFindOptions } from 'sequelize-typescript';
+import { PokemonGym } from '../models/PokemonGym';
 
 
 var listRaidRouter: Router = express.Router();
@@ -17,7 +20,15 @@ listRaidRouter.route('/listRaids')
 
 listRaidRouter.route('/listRaids/:id')
     .get((req: Request, res: Response) => {
-        ListRaid.findById(req.params.id)
+        let options: IFindOptions = { 
+            include: [{
+                model: PokemonGym,
+                include: [{
+                    model: Pokemon
+                }]
+            }]
+        }
+        ListRaid.findById(req.params.id, options)
             .then((listRaid: ListRaid) => {
                 res.status(200).json(listRaid);
             })
@@ -49,6 +60,5 @@ listRaidRouter.route('/listRaid/:id')
             .then(result => res.sendStatus(204))
             .catch(err => res.status(412).json({msg: err.message}));
     });
-
 
 export default listRaidRouter;
