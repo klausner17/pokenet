@@ -1,3 +1,4 @@
+import { Trainner } from './../models/Trainner';
 import { Router, Request, Response } from 'express';
 import { ListRaid } from './../models/ListRaid';
 import * as express from 'express';
@@ -5,6 +6,7 @@ import auth from '../middlewares/authentication';
 import { Pokemon } from '../models/Pokemon';
 import { IFindOptions } from 'sequelize-typescript';
 import { PokemonGym } from '../models/PokemonGym';
+import { RaidTrainners } from '../models/RaidTrainners';
 
 
 var listRaidRouter: Router = express.Router();
@@ -25,6 +27,11 @@ listRaidRouter.route('/listRaids/:id')
                 model: PokemonGym,
                 include: [{
                     model: Pokemon
+                }]
+            }, {
+                model: RaidTrainners,
+                include: [{
+                    model: Trainner
                 }]
             }]
         }
