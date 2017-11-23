@@ -7,6 +7,7 @@ import { Pokemon } from '../models/Pokemon';
 import { IFindOptions } from 'sequelize-typescript';
 import { PokemonGym } from '../models/PokemonGym';
 import { RaidTrainners } from '../models/RaidTrainners';
+import { Gym } from '../models/Gym';
 
 
 var listRaidRouter: Router = express.Router();
@@ -28,6 +29,8 @@ listRaidRouter.route('/listRaids/:id')
                 include: [{
                     model: Pokemon
                 }]
+            }, {
+                model: Gym
             }, {
                 model: RaidTrainners,
                 include: [{
