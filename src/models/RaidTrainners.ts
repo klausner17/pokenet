@@ -13,10 +13,10 @@ import { ListRaid } from "./ListRaid";
 @Table
 export class RaidTrainners extends Model<RaidTrainners> {
   @ForeignKey(() => Trainner)
-  trainnerId: Trainner;
+  trainnerId: number;
 
   @ForeignKey(() => ListRaid)
-  raidId: ListRaid;
+  raidId: number;
 
   @BelongsTo(() => Trainner)
   trainner: Trainner;

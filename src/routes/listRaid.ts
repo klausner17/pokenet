@@ -83,30 +83,50 @@ listRaidRouter
   });
 
 listRaidRouter
-  .route("/listRaid/:id/trainner")
+  .route("/listRaid/:id/trainner/:idTrainner")
   .all(auth.authenticate())
   .put((req: Request, res: Response) => {
-    const raidTrainner: RaidTrainners = new RaidTrainners();
-    raidTrainner.trainnerId = req.user.id;
-    raidTrainner.raidId = req.params.id;
-    raidTrainner
-      .save()
-      .then((raidTrainner: RaidTrainners) => {
-        res.status(200).json(raidTrainner);
-      })
-      .catch((error: Error) => {
-        res.status(412).json({ msg: error.message });
+    const userId: number = req.user.id;
+    const trainnerId: number = req.params.idTrainner;
+    Trainner.findOne({where: {userId: userId, id: trainnerId}})
+      .then(result => {
+        if (result) {
+        const raidTrainner: RaidTrainners = new RaidTrainners();
+        raidTrainner.trainnerId = trainnerId;
+        raidTrainner.raidId = req.params.id;
+        raidTrainner
+          .save()
+          .then((raidTrainner: RaidTrainners) => {
+            res.status(200).json(raidTrainner);
+          })
+          .catch((error: Error) => {
+            res.status(412).json({ msg: error.message });
+          });
+        }else{
+          res.sendStatus(401);
+        }
       });
   })
+
   .delete((req: Request, res: Response) => {
-    RaidTrainners.destroy({
-      where: { raidId: req.params.id, trainnerId: req.user.id }
-    })
-      .then((result: number) => {
-        res.sendStatus(204);
+    const userId: number = req.user.id;
+    const trainnerId: number = req.params.idTrainner;
+    Trainner.findOne({where: {userId: userId, id: trainnerId}})
+      .then(result => {
+        if (result) {
+          Trainner.findOne({where: {userId: userId, id: trainnerId}})
+          RaidTrainners.destroy({
+            where: { raidId: req.params.id, trainnerId: req.user.id }
+          })
+          .then((result: number) => {
+            res.sendStatus(204);
+          })
+          .catch((error: Error) => {
+            res.status(412).json({ msg: error.message });
+          });
+        } else {
+          res.sendStatus(401);
+        }
       })
-      .catch((error: Error) => {
-        res.status(412).json({ msg: error.message });
-      });
   });
 export default listRaidRouter;
