@@ -1,18 +1,22 @@
-import { Model, Table, Column, HasMany, CreatedAt, UpdatedAt } from 'sequelize-typescript';
-import { PokemonType } from './PokemonType';
-import { PokemonGym } from './PokemonGym';
+import {
+  Model,
+  Table,
+  Column,
+  HasMany,
+  CreatedAt,
+  UpdatedAt
+} from "sequelize-typescript";
+import { PokemonType } from "./PokemonType";
+import { PokemonGym } from "./PokemonGym";
 
 @Table
 export class Pokemon extends Model<Pokemon> {
-    @Column
-    name: string;
+  @Column name: string;
 
-    @HasMany(() => PokemonType)
-    pokemType: PokemonType[];
+  @HasMany(() => PokemonType)
+  pokemType: PokemonType[];
 
-    @CreatedAt
-    createdAt: Date;
+  @CreatedAt createdAt: Date;
 
-    @UpdatedAt
-    updatedAt: Date;
+  @UpdatedAt updatedAt: Date;
 }
