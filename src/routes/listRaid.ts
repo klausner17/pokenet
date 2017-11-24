@@ -14,7 +14,30 @@ import { Pokemon } from "../models/Pokemon";
 var listRaidRouter: Router = express.Router();
 
 listRaidRouter.route("/listRaids").get((req: Request, res: Response) => {
-  ListRaid.findAll()
+  let options: IFindOptions = {
+    include: [
+      {
+        model: PokemonGym,
+        include: [
+          {
+            model: Pokemon
+          }
+        ]
+      },
+      {
+        model: Gym
+      },
+      {
+        model: RaidTrainners,
+        include: [
+          {
+            model: Trainner
+          }
+        ]
+      }
+    ]
+  };
+  ListRaid.findAll(options)
     .then((listRaids: ListRaid[]) => {
       res.status(200).json(listRaids);
     })
@@ -85,7 +108,7 @@ listRaidRouter
 listRaidRouter
   .route("/listRaid/:id/trainner/:idTrainner")
   .all(auth.authenticate())
-  .put((req: Request, res: Response) => {
+  .post((req: Request, res: Response) => {
     const userId: number = req.user.id;
     const trainnerId: number = req.params.idTrainner;
     Trainner.findOne({ where: { userId: userId, id: trainnerId } }).then(
