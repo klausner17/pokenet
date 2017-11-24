@@ -5,9 +5,9 @@ import { Router, Request, Response } from "express";
 import auth from "../middlewares/authentication";
 
 import { PokemonGym } from "../models/PokemonGym";
-import { RaidTrainners } from '../models/RaidTrainners';
+import { RaidTrainners } from "../models/RaidTrainners";
 import { Gym } from "../models/Gym";
-import { ListRaid } from '../models/ListRaid';
+import { ListRaid } from "../models/ListRaid";
 import { Trainner } from "./../models/Trainner";
 import { Pokemon } from "../models/Pokemon";
 
@@ -82,27 +82,31 @@ listRaidRouter
       .catch(err => res.status(412).json({ msg: err.message }));
   });
 
-listRaidRouter.route('/listRaid/:id/trainner')
+listRaidRouter
+  .route("/listRaid/:id/trainner")
   .all(auth.authenticate())
   .put((req: Request, res: Response) => {
     const raidTrainner: RaidTrainners = new RaidTrainners();
     raidTrainner.trainnerId = req.user.id;
     raidTrainner.raidId = req.params.id;
-    raidTrainner.save()
+    raidTrainner
+      .save()
       .then((raidTrainner: RaidTrainners) => {
         res.status(200).json(raidTrainner);
       })
       .catch((error: Error) => {
-        res.status(412).json({msg: error.message});
+        res.status(412).json({ msg: error.message });
       });
   })
   .delete((req: Request, res: Response) => {
-    RaidTrainners.destroy({where: {raidId: req.params.id, trainnerId: req.user.id}})
-      .then((result: number)=> {
+    RaidTrainners.destroy({
+      where: { raidId: req.params.id, trainnerId: req.user.id }
+    })
+      .then((result: number) => {
         res.sendStatus(204);
       })
       .catch((error: Error) => {
-        res.status(412).json({msg: error.message});
+        res.status(412).json({ msg: error.message });
       });
-  })
+  });
 export default listRaidRouter;
