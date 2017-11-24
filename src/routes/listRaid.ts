@@ -65,24 +65,7 @@ listRaidRouter
       .catch(err => res.status(412).json({ msg: err.message }));
   });
 
-listRaidRouter
-  .route("/listRaid/:id")
-  .all(auth.authenticate())
-  .put((req: Request, res: Response) => {
-    delete req.body.id;
-    ListRaid.update(req.body, {
-      where: { id: req.params.id, userId: req.user.id }
-    })
-      .then(result => res.sendStatus(204))
-      .catch(err => res.status(412).json({ msg: err.message }));
-  })
-  .delete((req: Request, res: Response) => {
-    ListRaid.destroy({ where: { id: req.params.id, userId: req.user.id } })
-      .then(result => res.sendStatus(204))
-      .catch(err => res.status(412).json({ msg: err.message }));
-  });
-
-listRaidRouter
+  listRaidRouter
   .route("/listRaid/:id/trainner/:idTrainner")
   .all(auth.authenticate())
   .put((req: Request, res: Response) => {
@@ -90,6 +73,7 @@ listRaidRouter
     const trainnerId: number = req.params.idTrainner;
     Trainner.findOne({where: {userId: userId, id: trainnerId}})
       .then(result => {
+        console.log(result);
         if (result) {
         const raidTrainner: RaidTrainners = new RaidTrainners();
         raidTrainner.trainnerId = trainnerId;
@@ -129,4 +113,23 @@ listRaidRouter
         }
       })
   });
+
+listRaidRouter
+  .route("/listRaid/:id")
+  .all(auth.authenticate())
+  .put((req: Request, res: Response) => {
+    delete req.body.id;
+    ListRaid.update(req.body, {
+      where: { id: req.params.id, userId: req.user.id }
+    })
+      .then(result => res.sendStatus(204))
+      .catch(err => res.status(412).json({ msg: err.message }));
+  })
+  .delete((req: Request, res: Response) => {
+    ListRaid.destroy({ where: { id: req.params.id, userId: req.user.id } })
+      .then(result => res.sendStatus(204))
+      .catch(err => res.status(412).json({ msg: err.message }));
+  });
+
+
 export default listRaidRouter;
