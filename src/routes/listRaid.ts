@@ -26,16 +26,11 @@ listRaidRouter.route("/listRaids").get((req: Request, res: Response) => {
       },
       {
         model: Gym
-      },
-      {
-        model: RaidTrainners,
-        include: [
-          {
-            model: Trainner
-          }
-        ]
       }
-    ]
+    ], where: { timeToClose: {
+      $lte: new Date().setUTCHours(20, 59, 59),
+      $gte: new Date().setUTCHours(6, 0, 0)
+    }}
   };
   ListRaid.findAll(options)
     .then((listRaids: ListRaid[]) => {
