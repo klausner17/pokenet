@@ -68,6 +68,10 @@ listRaidRouter.route("/listRaids/:id").get((req: Request, res: Response) => {
               attributes: ['id','name']
             }]
           }]
+      },
+      {
+        model: User,
+        attributes: ['id','name']
       }]
   };
   ListRaid.findById(req.params.id, options)
