@@ -14,13 +14,6 @@ userRoutes
     next();
   })
   .post((req: Request, res: Response, next) => {
-    const options: IFindOptions = {
-      attributes: ['id', 'name'],
-      include: [{
-        model: Trainner,
-        attributes: ['id', 'name', 'level']
-      }]
-    }
     User.create(req.body)
       .then(result => {
         res.status(200).json(result);
@@ -34,7 +27,14 @@ userRoutes
   .route("/user")
   .all(auth.authenticate())
   .get((req: Request, res: Response) => {
-    User.findById(req.user.id, { attributes: ["id", "name", "email"] })
+    const options: IFindOptions = {
+      attributes: ['id', 'name'],
+      include: [{
+        model: Trainner,
+        attributes: ['id', 'name', 'level']
+      }]
+    }
+    User.findById(req.user.id, options)
       .then((user: User) => res.status(200).json(user))
       .catch(error => res.status(412).json({ msg: error.message }));
   })
