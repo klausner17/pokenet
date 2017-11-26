@@ -10,6 +10,7 @@ import { Gym } from "../models/Gym";
 import { ListRaid } from "../models/ListRaid";
 import { Trainner } from "./../models/Trainner";
 import { Pokemon } from "../models/Pokemon";
+import { User } from "../models/User";
 
 var listRaidRouter: Router = express.Router();
 
@@ -43,27 +44,31 @@ listRaidRouter.route("/listRaids").get((req: Request, res: Response) => {
 
 listRaidRouter.route("/listRaids/:id").get((req: Request, res: Response) => {
   let options: IFindOptions = {
+    attributes: ['id', 'maxTrainners', 'timeToClose','meetingTime'],
     include: [
       {
         model: PokemonGym,
-        include: [
-          {
+        attributes: ['id', 'combatPower'], 
+        include: [{
+            attributes: ['id', 'name'],         
             model: Pokemon
-          }
-        ]
+          }]
       },
       {
-        model: Gym
+        model: Gym,
+        attributes: ['id','name','alias','latitude','longitude']
       },
       {
         model: RaidTrainners,
-        include: [
-          {
-            model: Trainner
-          }
-        ]
-      }
-    ]
+        include: [{
+            model: Trainner,
+            attributes: ['id','name','level'],
+            include: [{
+              model: User,
+              attributes: ['id','name']
+            }]
+          }]
+      }]
   };
   ListRaid.findById(req.params.id, options)
     .then((listRaid: ListRaid) => {
