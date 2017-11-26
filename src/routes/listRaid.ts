@@ -27,10 +27,12 @@ listRaidRouter.route("/listRaids").get((req: Request, res: Response) => {
       {
         model: Gym
       }
-    ], where: { timeToClose: {
-      $lte: new Date().setUTCHours(20, 59, 59),
-      $gte: new Date().setUTCHours(6, 0, 0)
-    }}
+    ], where: {
+      timeToClose: {
+        $lte: new Date().setUTCHours(20, 59, 59),
+        $gte: new Date().setUTCHours(6, 0, 0)
+      }
+    }
   };
   ListRaid.findAll(options)
     .then((listRaids: ListRaid[]) => {
@@ -130,12 +132,14 @@ listRaidRouter
   .delete((req: Request, res: Response) => {
     const userId: number = req.user.id;
     const trainnerId: number = req.params.idTrainner;
-    Trainner.findOne({ where: { userId: userId, id: trainnerId } }).then(
-      result => {
+    const options: IFindOptions = {
+      where: { userId: userId, id: trainnerId }
+    };
+    Trainner.findOne(options)
+      .then((result: Trainner) => {
         if (result) {
-          Trainner.findOne({ where: { userId: userId, id: trainnerId } });
           RaidTrainners.destroy({
-            where: { raidId: req.params.id, trainnerId: req.user.id }
+            where: { raidId: req.params.id, trainnerId: trainnerId }
           })
             .then((result: number) => {
               res.sendStatus(204);
@@ -147,7 +151,7 @@ listRaidRouter
           res.sendStatus(401);
         }
       }
-    );
+      );
   });
 
 export default listRaidRouter;

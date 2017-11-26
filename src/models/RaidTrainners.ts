@@ -13,9 +13,11 @@ import { ListRaid } from "./ListRaid";
 @Table
 export class RaidTrainners extends Model<RaidTrainners> {
   @ForeignKey(() => Trainner)
+  @Column({unique: 'uniqueTrainner'})
   trainnerId: number;
 
   @ForeignKey(() => ListRaid)
+  @Column({unique: 'uniqueTrainner'})
   raidId: number;
 
   @BelongsTo(() => Trainner)
