@@ -1,7 +1,9 @@
+import { IFindOptions } from 'sequelize-typescript';
 import { Router, Request, Response, NextFunction } from "express";
 import * as express from "express";
 import { User } from "../models/User";
 import auth from "../middlewares/authentication";
+import { Trainner } from '../models/Trainner';
 
 var userRoutes: Router = express.Router();
 
@@ -12,6 +14,13 @@ userRoutes
     next();
   })
   .post((req: Request, res: Response, next) => {
+    const options: IFindOptions = {
+      attributes: ['id', 'name'],
+      include: [{
+        model: Trainner,
+        attributes: ['id', 'name', 'level']
+      }]
+    }
     User.create(req.body)
       .then(result => {
         res.status(200).json(result);
