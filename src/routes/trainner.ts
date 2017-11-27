@@ -1,3 +1,5 @@
+import { IFindOptions } from 'sequelize-typescript';
+import { IFindOptions } from 'sequelize-typescript';
 import { User } from "./../models/User";
 import { Router, Request, Response, NextFunction } from "express";
 import * as express from "express";
@@ -10,7 +12,15 @@ trainnerRouter
   .route("/trainner")
   .all(auth.authenticate())
   .get((req: Request, res: Response) => {
-    Trainner.findAll({ where: { userId: req.user.id } })
+    const options: IFindOptions = {
+      attributes: ['id','name','level'],
+      where: {userId: req.user.id},
+      include: [{
+        model: User,
+        attributes: ['id','name']
+      }]
+    }
+    Trainner.findAll(options)
       .then((trainners: Trainner[]) => {
         res.status(200).json(trainners);
       })
@@ -28,6 +38,13 @@ trainnerRouter
   .route("/trainner/:id")
   .all(auth.authenticate())
   .get((req: Request, res: Response) => {
+    const options: IFindOptions = {
+      attributes: ['id', 'name'],
+      include: [{
+        model: Trainner,
+        attributes: ['id','name','level']
+      }]
+    }
     Trainner.findOne({ where: { id: req.params.id, userId: req.user.id } })
       .then((trainner: Trainner) => {
         res.status(200).json(trainner);
