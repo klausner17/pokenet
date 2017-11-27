@@ -1,5 +1,4 @@
 import { IFindOptions } from 'sequelize-typescript';
-import { IFindOptions } from 'sequelize-typescript';
 import { User } from "./../models/User";
 import { Router, Request, Response, NextFunction } from "express";
 import * as express from "express";
