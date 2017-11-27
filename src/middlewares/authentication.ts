@@ -13,19 +13,21 @@ import {
   IOAuth2StrategyOption,
   Profile
 } from "passport-google-oauth";
+import * as file from '../boot';
 
 class Authentication {
-  private _config = require("../config.json");
+
+  config: any = file.default;
 
   constructor() {
     let optionsLocal: StrategyOptions = {
-      secretOrKey: this._config.auth.secretKey,
+      secretOrKey: this.config.auth.secretKey,
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
     };
     let optionsGoogle: IOAuth2StrategyOption = {
-      clientID: this._config.googleAuth.clientId,
-      clientSecret: this._config.googleAuth.clientSecret,
-      callbackURL: this._config.googleAuth.callbackURL
+      clientID: this.config.googleAuth.clientId,
+      clientSecret: this.config.googleAuth.clientSecret,
+      callbackURL: this.config.googleAuth.callbackURL
     };
 
     passport.serializeUser((user: User, done) => {
@@ -98,7 +100,7 @@ class Authentication {
   }
 
   authenticate(): Handler {
-    return passport.authenticate("jwt", { session: this._config.session });
+    return passport.authenticate("jwt", { session: this.config.session });
   }
 }
 

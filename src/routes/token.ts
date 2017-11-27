@@ -2,7 +2,9 @@ import { Router, Request, Response } from "express";
 import * as express from "express";
 import { User } from "../models/User";
 import * as jwt from "jwt-simple";
-const config: any = require("../config.json").auth;
+import * as file from '../boot';
+
+const config: any = file.default;
 
 var tokenRouter: Router = express.Router();
 

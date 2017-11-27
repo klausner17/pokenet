@@ -3,7 +3,9 @@ import * as express from "express";
 import * as passport from "passport";
 import auth from "../middlewares/authentication";
 import * as jwt from "jwt-simple";
-const config: any = require("../config.json").auth;
+import * as file from '../boot';
+
+const config: any = file.default;
 
 var googleRouter: Router = express.Router();
 

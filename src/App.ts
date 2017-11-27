@@ -16,9 +16,10 @@ import listRaidRouter from "./routes/listRaid";
 import googleRouter from "./routes/google";
 import * as cors from "cors";
 import pokemonRouter from "./routes/pokemon";
+import * as file from './boot'
 
 class App {
-  config = require("./config.json");
+  config = file.default;
 
   public express: express.Application;
 
@@ -50,13 +51,13 @@ class App {
   }
 
   private databaseConnect() {
-    let dbConf = this.config["database"];
+    let dbConf = this.config.database;
     let sequelize = new Sequelize({
-      database: dbConf["database"],
-      username: dbConf["user"],
-      password: dbConf["password"],
-      dialect: dbConf["dialect"],
-      port: dbConf["port"],
+      database: dbConf.database,
+      username: dbConf.user,
+      password: dbConf.password,
+      dialect: dbConf.dialect,
+      port: dbConf.port,
       modelPaths: [__dirname + "/models"]
     });
     // sequelize.drop()

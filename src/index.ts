@@ -1,11 +1,11 @@
 import * as http from "http";
 import * as debug from "debug";
-
+import * as boot from './boot';
 import app from "./App";
 
-debug("ts-express:server");
+var config: any = boot.default;
 
-const port = normalizePort(process.env.PORT || 3000);
+const port = normalizePort(config.port);
 app.express.set("port", port);
 
 const server = http.createServer(app.express);
