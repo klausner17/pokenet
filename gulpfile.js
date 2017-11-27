@@ -21,7 +21,7 @@ gulp.task('assets', function() {
 });
 
 gulp.task('data', function() {
-  return gulp.src(['./src/**/*.json','./src/*.json' ])
+  return gulp.src(['src/**/*.json','src/*.json' ])
   .pipe(gulp.dest('./dist'));
 });
 

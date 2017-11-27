@@ -1,7 +1,0 @@
-{
-    "connectionMongo": {
-        "server": "localhost",
-        "port": "27017",
-        "database": "listraid"
-    }
-}
