@@ -18,7 +18,7 @@ tokenRouter.post("/token", (req: Request, res: Response) => {
           let payload: {} = { id: user.id };
           res
             .status(200)
-            .json({ token: jwt.encode(payload, config.secretKey) });
+            .json({ token: jwt.encode(payload, config.auth.secretKey) });
         } else {
           res.sendStatus(401);
         }
