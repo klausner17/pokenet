@@ -1,5 +1,5 @@
 module.exports = {
-    port: process.env.PORT,
+    port: process.env.NODE_PORT,
     database: {
       host: process.env.HOST,
       dialect: "mysql",
