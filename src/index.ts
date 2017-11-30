@@ -7,6 +7,7 @@ var config: any = boot.default;
 
 const port = normalizePort(config.port);
 app.express.set("port", port);
+console.log(port);
 
 const server = http.createServer(app.express);
 server.listen(port);
