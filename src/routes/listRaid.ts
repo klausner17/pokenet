@@ -119,7 +119,6 @@ listRaidRouter
     const trainnerId: number = req.params.idTrainner;
     Trainner.findOne({ where: { userId: userId, id: trainnerId } }).then(
       result => {
-        console.log(result);
         if (result) {
           const raidTrainner: RaidTrainners = new RaidTrainners();
           raidTrainner.trainnerId = trainnerId;
