@@ -60,8 +60,7 @@ class App {
       port: dbConf.port,
       modelPaths: [__dirname + "/models"]
     });
-    // sequelize.drop()
-    //   .then(() => sequelize.sync());      
+    sequelize.sync();      
   }
 }
 
