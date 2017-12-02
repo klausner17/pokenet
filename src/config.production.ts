@@ -1,8 +1,9 @@
 module.exports = {
     port: process.env.PORT,
     database: {
+      connectionString: process.env.DATABASE_URL,      
       host: process.env.MYSQL_HOST,
-      dialect: "mysql",
+      dialect: "postgres",
       user: process.env.MYSQL_USER,
       password: process.env.MYSQL_PASSWORD,
       database: process.env.MYSQL_DATABASE,

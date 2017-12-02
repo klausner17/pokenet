@@ -1,12 +1,13 @@
 module.exports = {
   port: 3000,
   database: {
+    connectionString: "postgres://postgres:root@localhost:5432/pokenet",  
     host: "localhost",
-    dialect: "mysql",
-    user: "root",
+    dialect: "postgres",
+    user: "postgres",
     password: "root",
     database: "pokenet",
-    port: 3306,
+    port: 5432,
     pool: {
       max: 5,
       min: 0,

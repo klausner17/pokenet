@@ -52,14 +52,16 @@ class App {
 
   private databaseConnect() {
     let dbConf = this.config.database;
-    let sequelize = new Sequelize({
-      database: dbConf.database,
-      username: dbConf.user,
-      password: dbConf.password,
-      dialect: dbConf.dialect,
-      port: dbConf.port,
-      modelPaths: [__dirname + "/models"]
-    });
+    let sequelize = new Sequelize(dbConf.connectionString);
+    // let sequelize = new Sequelize({
+    //   database: dbConf.database,
+    //   username: dbConf.user,
+    //   password: dbConf.password,
+    //   dialect: dbConf.dialect,
+    //   port: dbConf.port,
+    //   modelPaths: [__dirname + "/models"]
+    // })
+    sequelize.addModels([__dirname + "/models"]);
     sequelize.sync();      
   }
 }
