@@ -15,6 +15,7 @@ import { User } from "../models/User";
 var listRaidRouter: Router = express.Router();
 
 listRaidRouter.route("/listRaids").get((req: Request, res: Response) => {
+  let date = new Date();
   let options: IFindOptions = {
     include: [
       {
@@ -30,8 +31,7 @@ listRaidRouter.route("/listRaids").get((req: Request, res: Response) => {
       }
     ], where: {
       timeToClose: {
-        $lte: new Date().setUTCHours(20, 59, 59),
-        $gte: new Date().setUTCHours(6, 0, 0)
+        $gte: date.setHours(date.getHours() - 2)
       }
     }
   };
