@@ -30,8 +30,8 @@ listRaidRouter.route("/listRaids").get((req: Request, res: Response) => {
         model: Gym
       }
     ], where: {
-      timeToClose: {
-        $gte: date.setHours(date.getHours() - 2)
+      meetingTime: {
+        gte: date
       }
     }
   };
