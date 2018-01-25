@@ -4,6 +4,7 @@ import * as express from "express";
 import { User } from "../models/User";
 import auth from "../middlewares/authentication";
 import { Trainner } from '../models/Trainner';
+import { CountOptions } from 'sequelize-typescript/node_modules/@types/sequelize';
 
 var userRoutes: Router = express.Router();
 
@@ -14,12 +15,25 @@ userRoutes
     next();
   })
   .post((req: Request, res: Response, next) => {
-    User.create(req.body)
-      .then(result => {
-        res.status(200).json(result);
-      })
-      .catch(error => {
-        res.status(402).json({ msg: "internal error" });
+    //verificar se já existe um usuário com o mesmo e-mail
+    const opt: CountOptions = {
+      where: {
+        email: req.body.email
+      }
+    }
+    User.count(opt)
+      .then(rows => {
+        if (rows === 0) {
+          User.create(req.body)
+            .then(result => {
+              res.status(200).json(result);
+            })
+            .catch(error => {
+              res.status(402).json({ msg: "internal error" });
+            })
+        } else {
+          res.status(412).json({ msg: 'E-mail já cadastrado' });
+        }
       });
   });
 
