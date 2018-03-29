@@ -1,21 +1,21 @@
-import { Router, Request, Response } from "express";
-import * as express from "express";
-import { User } from "../models/User";
-import * as jwt from "jwt-simple";
+import { Router, Request, Response } from 'express';
+import * as express from 'express';
+import { User } from '../models/User';
+import * as jwt from 'jwt-simple';
 import * as file from '../boot';
 
 const config: any = file.default;
 
-var tokenRouter: Router = express.Router();
+const tokenRouter: Router = express.Router();
 
-tokenRouter.post("/token", (req: Request, res: Response) => {
+tokenRouter.post('/token', (req: Request, res: Response) => {
   if (req.body.email && req.body.password) {
-    let email: string = req.body.email;
-    let pass: string = req.body.password;
+    const email: string = req.body.email;
+    const pass: string = req.body.password;
     User.findOne({ where: { email: email } })
       .then((user: User) => {
         if (user.verifyPassword(pass)) {
-          let payload: {} = { id: user.id };
+          const payload: {} = { id: user.id };
           res
             .status(200)
             .json({ token: jwt.encode(payload, config.auth.secretKey) });
@@ -23,7 +23,7 @@ tokenRouter.post("/token", (req: Request, res: Response) => {
           res.sendStatus(401);
         }
       })
-      .catch(error => res.sendStatus(401));
+      .catch((error) => res.sendStatus(401));
   } else {
     res.sendStatus(401);
   }

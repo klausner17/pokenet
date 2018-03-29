@@ -1,35 +1,31 @@
-import * as http from "http";
-import * as debug from "debug";
+import * as http from 'http';
+import * as debug from 'debug';
 import * as boot from './boot';
-import app from "./App";
+import app from './App';
 
-var config: any = boot.default;
+const config: any = boot.default;
 
 const port = normalizePort(config.port);
-app.express.set("port", port);
+app.express.set('port', port);
 
 const server = http.createServer(app.express);
 server.listen(port);
-server.on("error", onError);
-server.on("listening", onListening);
+server.on('error', onError);
+server.on('listening', onListening);
 
 function normalizePort(val: number | string): number | string | boolean {
-  let port: number = typeof val === "string" ? parseInt(val, 10) : val;
-  if (isNaN(port)) return val;
-  else if (port >= 0) return port;
-  else return false;
+  const portIn: number = typeof val === 'string' ? parseInt(val, 10) : val;
+  if (isNaN(portIn)) { return val; } else if (portIn >= 0) { return portIn; } else { return false; }
 }
 
 function onError(error: NodeJS.ErrnoException): void {
-  if (error.syscall !== "listen") throw error;
-  let bind = typeof port === "string" ? "Pipe " + port : "Port " + port;
+  if (error.syscall !== 'listen') { throw error; }
+  const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
   switch (error.code) {
-    case "EACCES":
-      console.error("${bind} requires elevated privileges");
+    case 'EACCES':
       process.exit(1);
       break;
-    case "EADDRINUSE":
-      console.error("${bind} is already in use");
+    case 'EADDRINUSE':
       process.exit(1);
       break;
     default:
@@ -38,7 +34,7 @@ function onError(error: NodeJS.ErrnoException): void {
 }
 
 function onListening(): void {
-  let addr = server.address();
-  let bind = typeof addr == "string" ? "pipe ${addr}" : "port ${addr.port}";
-  debug("Listening on ${bind}");
+  const addr = server.address();
+  const bind = typeof addr === 'string' ? 'pipe ${addr}' : 'port ${addr.port}';
+  debug('Listening on ${bind}');
 }

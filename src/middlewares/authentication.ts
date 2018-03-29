@@ -4,27 +4,27 @@ import {
   ExtractJwt,
   VerifyCallback,
   VerifiedCallback
-} from "passport-jwt";
-import { User } from "../models/User";
-import * as passport from "passport";
-import { Handler } from "express-serve-static-core";
+} from 'passport-jwt';
+import { User } from '../models/User';
+import * as passport from 'passport';
+import { Handler } from 'express-serve-static-core';
 import {
   OAuth2Strategy,
   IOAuth2StrategyOption,
   Profile
-} from "passport-google-oauth";
+} from 'passport-google-oauth';
 import * as file from '../boot';
 
 class Authentication {
 
-  config: any = file.default;
+  private config: any = file.default;
 
   constructor() {
-    let optionsLocal: StrategyOptions = {
+    const optionsLocal: StrategyOptions = {
       secretOrKey: this.config.auth.secretKey,
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
     };
-    let optionsGoogle: IOAuth2StrategyOption = {
+    const optionsGoogle: IOAuth2StrategyOption = {
       clientID: this.config.googleAuth.clientId,
       clientSecret: this.config.googleAuth.clientSecret,
       callbackURL: this.config.googleAuth.callbackURL
@@ -36,18 +36,17 @@ class Authentication {
 
     passport.deserializeUser((id: number, done) => {
       User.findById(id)
-        .then(result => done(null, result))
-        .catch(err => done(err, null));
+        .then((result) => done(null, result))
+        .catch((err) => done(err, null));
     });
 
-    let localStrategy = new Strategy(optionsLocal, this.verify);
-    let googleStrategy = new OAuth2Strategy(optionsGoogle, this.googleVerify);
+    const localStrategy = new Strategy(optionsLocal, this.verify);
+    const googleStrategy = new OAuth2Strategy(optionsGoogle, this.googleVerify);
     passport.use(localStrategy);
     passport.use(googleStrategy);
   }
 
-  verify(payload: User, done: VerifiedCallback): VerifyCallback | void {
-    let error: Error;
+  public verify(payload: User, done: VerifiedCallback): VerifyCallback | void {
     User.findById(payload.id)
       .then((user: User) => {
         if (user) {
@@ -55,10 +54,10 @@ class Authentication {
         }
         return done(null, false);
       })
-      .catch(err => done(err, null));
+      .catch((err) => done(err, null));
   }
 
-  googleVerify(
+  public googleVerify(
     accesToken: string,
     refreshToken: string,
     profile: Profile,
@@ -74,7 +73,7 @@ class Authentication {
               .then((result: User) => {
                 return done(null, { id: result.id });
               })
-              .catch(error => {
+              .catch((error) => {
                 return done(error, null);
               });
           } else {
@@ -86,7 +85,7 @@ class Authentication {
               .then((result: User) => {
                 return done(null, { id: result.id });
               })
-              .catch(error => {
+              .catch((error) => {
                 return done(error, null);
               });
           }
@@ -95,14 +94,14 @@ class Authentication {
     });
   }
 
-  initialize(): Handler {
+  public initialize(): Handler {
     return passport.initialize();
   }
 
-  authenticate(): Handler {
-    return passport.authenticate("jwt", { session: this.config.session });
+  public authenticate(): Handler {
+    return passport.authenticate('jwt', { session: this.config.session });
   }
 }
 
-var auth: Authentication = new Authentication();
+const auth: Authentication = new Authentication();
 export default auth;

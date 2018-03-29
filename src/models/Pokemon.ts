@@ -5,18 +5,18 @@ import {
   HasMany,
   CreatedAt,
   UpdatedAt
-} from "sequelize-typescript";
-import { PokemonType } from "./PokemonType";
-import { PokemonGym } from "./PokemonGym";
+} from 'sequelize-typescript';
+import { PokemonType } from './PokemonType';
+import { PokemonGym } from './PokemonGym';
 
 @Table
 export class Pokemon extends Model<Pokemon> {
-  @Column name: string;
+  @Column public name: string;
 
   @HasMany(() => PokemonType)
-  pokemType: PokemonType[];
+  public pokemType: PokemonType[];
 
-  @CreatedAt createdAt: Date;
+  @CreatedAt public createdAt: Date;
 
-  @UpdatedAt updatedAt: Date;
+  @UpdatedAt public updatedAt: Date;
 }

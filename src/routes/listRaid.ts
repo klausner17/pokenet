@@ -1,132 +1,121 @@
-import * as express from "express";
-import { IFindOptions } from "sequelize-typescript";
-import { Router, Request, Response } from "express";
+import * as express from 'express';
+import { IFindOptions } from 'sequelize-typescript';
+import { Router, Request, Response } from 'express';
+import auth from '../middlewares/authentication';
+import { PokemonGym } from '../models/PokemonGym';
+import { RaidTrainners } from '../models/RaidTrainners';
+import { Gym } from '../models/Gym';
+import { ListRaid } from '../models/ListRaid';
+import { Trainner } from './../models/Trainner';
+import { Pokemon } from '../models/Pokemon';
+import { User } from '../models/User';
 
-import auth from "../middlewares/authentication";
+const listRaidRouter: Router = express.Router();
 
-import { PokemonGym } from "../models/PokemonGym";
-import { RaidTrainners } from "../models/RaidTrainners";
-import { Gym } from "../models/Gym";
-import { ListRaid } from "../models/ListRaid";
-import { Trainner } from "./../models/Trainner";
-import { Pokemon } from "../models/Pokemon";
-import { User } from "../models/User";
-
-var listRaidRouter: Router = express.Router();
-
-listRaidRouter.route("/listRaids").get((req: Request, res: Response) => {
-  let date = new Date();
-  let options: IFindOptions = {
-    include: [
-      {
-        model: PokemonGym,
-        include: [
-          {
-            model: Pokemon
-          }
-        ]
-      },
-      {
-        model: Gym
-      }
-    ], where: {
-      meetingTime: {
-        gte: date
-      }
-    }
+listRaidRouter.route('/listRaids').get((req: Request, res: Response) => {
+  const date = new Date();
+  const options: any = {
+    include: [{
+      model: PokemonGym,
+      include: [{
+        model: Pokemon }]
+    }, {
+      model: Gym
+    }],
+    where: { meetingTime: { gte: date } }
   };
   ListRaid.findAll(options)
     .then((listRaids: ListRaid[]) => {
       res.status(200).json(listRaids);
     })
-    .catch(err => res.status(412).json({ msg: err.message }));
+    .catch((err) => res.status(412).json({ msg: err.message }));
 });
 
-listRaidRouter.route("/listRaids/:id").get((req: Request, res: Response) => {
-  let options: IFindOptions = {
-    attributes: ['id', 'maxTrainners', 'timeToClose','meetingTime'],
+listRaidRouter.route('/listRaids/:id').get((req: Request, res: Response) => {
+  const options: IFindOptions = {
+    attributes: ['id', 'maxTrainners', 'timeToClose', 'meetingTime'],
     include: [
       {
         model: PokemonGym,
-        attributes: ['id', 'combatPower'], 
+        attributes: ['id', 'combatPower'],
         include: [{
-            attributes: ['id', 'name'],         
-            model: Pokemon
-          }]
+          attributes: ['id', 'name'],
+          model: Pokemon
+        }]
       },
       {
         model: Gym,
-        attributes: ['id','name','alias','latitude','longitude']
+        attributes: ['id', 'name', 'alias', 'latitude', 'longitude']
       },
       {
         model: RaidTrainners,
         include: [{
-            model: Trainner,
-            attributes: ['id','name','level'],
-            include: [{
-              model: User,
-              attributes: ['id','name']
-            }]
+          model: Trainner,
+          attributes: ['id', 'name', 'level'],
+          include: [{
+            model: User,
+            attributes: ['id', 'name']
           }]
+        }]
       },
       {
         model: User,
-        attributes: ['id','name']
+        attributes: ['id', 'name']
       }]
   };
   ListRaid.findById(req.params.id, options)
     .then((listRaid: ListRaid) => {
       res.status(200).json(listRaid);
     })
-    .catch(err => res.status(412).json({ msg: err.message }));
+    .catch((err) => res.status(412).json({ msg: err.message }));
 });
 
 listRaidRouter
-  .route("/listRaid")
+  .route('/listRaid')
   .all(auth.authenticate())
   .post((req: Request, res: Response) => {
     delete req.body.id;
     req.body.userId = req.user.id;
     ListRaid.create(req.body)
-      .then(listRaid => {
+      .then((listRaid) => {
         res.status(200).json(listRaid);
       })
-      .catch(err => res.status(412).json({ msg: err.message }));
+      .catch((err) => res.status(412).json({ msg: err.message }));
   });
 
 listRaidRouter
-  .route("/listRaid/:id")
+  .route('/listRaid/:id')
   .all(auth.authenticate())
   .put((req: Request, res: Response) => {
     delete req.body.id;
     ListRaid.update(req.body, {
       where: { id: req.params.id, userId: req.user.id }
     })
-      .then(result => res.sendStatus(204))
-      .catch(err => res.status(412).json({ msg: err.message }));
+      .then((result) => res.sendStatus(204))
+      .catch((err) => res.status(412).json({ msg: err.message }));
   })
   .delete((req: Request, res: Response) => {
     ListRaid.destroy({ where: { id: req.params.id, userId: req.user.id } })
-      .then(result => res.sendStatus(204))
-      .catch(err => res.status(412).json({ msg: err.message }));
+      .then((result) => res.sendStatus(204))
+      .catch((err) => res.status(412).json({ msg: err.message }));
   });
 
 listRaidRouter
-  .route("/listRaid/:id/trainner/:idTrainner")
+  .route('/listRaid/:id/trainner/:idTrainner')
   .all(auth.authenticate())
   .post((req: Request, res: Response) => {
     const userId: number = req.user.id;
     const trainnerId: number = req.params.idTrainner;
     Trainner.findOne({ where: { userId: userId, id: trainnerId } }).then(
-      result => {
+      (result) => {
         if (result) {
           const raidTrainner: RaidTrainners = new RaidTrainners();
           raidTrainner.trainnerId = trainnerId;
           raidTrainner.raidId = req.params.id;
           raidTrainner
             .save()
-            .then((raidTrainner: RaidTrainners) => {
-              res.status(200).json(raidTrainner);
+            .then((trainner: RaidTrainners) => {
+              res.status(200).json(trainner);
             })
             .catch((error: Error) => {
               res.status(412).json({ msg: error.message });
@@ -149,7 +138,7 @@ listRaidRouter
           RaidTrainners.destroy({
             where: { raidId: req.params.id, trainnerId: trainnerId }
           })
-            .then((result: number) => {
+            .then(() => {
               res.sendStatus(204);
             })
             .catch((error: Error) => {

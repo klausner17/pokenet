@@ -1,4 +1,4 @@
-import { ListRaid } from "./ListRaid";
+import { ListRaid } from './ListRaid';
 import {
   Model,
   Table,
@@ -6,22 +6,22 @@ import {
   HasMany,
   CreatedAt,
   UpdatedAt
-} from "sequelize-typescript";
+} from 'sequelize-typescript';
 
 @Table
 export class Gym extends Model<Gym> {
-  @Column alias: string;
+  @Column public alias: string;
 
-  @Column name: string;
+  @Column public name: string;
 
-  @Column latitude: string;
+  @Column public latitude: string;
 
-  @Column longitude: string;
+  @Column public longitude: string;
 
   @HasMany(() => ListRaid)
-  pokemonGym: ListRaid[];
+  public pokemonGym: ListRaid[];
 
-  @CreatedAt createdAt: Date;
+  @CreatedAt public createdAt: Date;
 
-  @UpdatedAt updatedAt: Date;
+  @UpdatedAt public updatedAt: Date;
 }

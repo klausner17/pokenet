@@ -1,4 +1,4 @@
-import { Trainner } from "./Trainner";
+import { Trainner } from './Trainner';
 import {
   Model,
   Table,
@@ -7,26 +7,26 @@ import {
   CreatedAt,
   UpdatedAt,
   ForeignKey
-} from "sequelize-typescript";
-import { ListRaid } from "./ListRaid";
+} from 'sequelize-typescript';
+import { ListRaid } from './ListRaid';
 
 @Table
 export class RaidTrainners extends Model<RaidTrainners> {
   @ForeignKey(() => Trainner)
   @Column({unique: 'uniqueTrainner'})
-  trainnerId: number;
+  public trainnerId: number;
 
   @ForeignKey(() => ListRaid)
   @Column({unique: 'uniqueTrainner'})
-  raidId: number;
+  public raidId: number;
 
   @BelongsTo(() => Trainner)
-  trainner: Trainner;
+  public trainner: Trainner;
 
   @BelongsTo(() => ListRaid)
-  listRaid: ListRaid;
+  public listRaid: ListRaid;
 
-  @CreatedAt createdAt: Date;
+  @CreatedAt public createdAt: Date;
 
-  @UpdatedAt updatedAt: Date;
+  @UpdatedAt public updatedAt: Date;
 }

@@ -1,4 +1,4 @@
-import { ListRaid } from "./ListRaid";
+import { ListRaid } from './ListRaid';
 import {
   Table,
   Model,
@@ -10,25 +10,25 @@ import {
   Unique,
   CreatedAt,
   UpdatedAt
-} from "sequelize-typescript";
-import { User } from "./User";
+} from 'sequelize-typescript';
+import { User } from './User';
 
 @Table
 export class Trainner extends Model<Trainner> {
   @Column({ unique: true, allowNull: false })
-  name: String;
+  public name: string;
 
   @Column({ allowNull: false })
-  level: number;
+  public level: number;
 
   @ForeignKey(() => User)
   @Column({ allowNull: false })
-  userId: number;
+  public userId: number;
 
   @BelongsTo(() => User)
-  user: User;
+  public user: User;
 
-  @CreatedAt createdAt: Date;
+  @CreatedAt public createdAt: Date;
 
-  @UpdatedAt updatedAt: Date;
+  @UpdatedAt public updatedAt: Date;
 }

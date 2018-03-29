@@ -1,5 +1,5 @@
-import { User } from "./User";
-import { PokemonGym } from "./PokemonGym";
+import { User } from './User';
+import { PokemonGym } from './PokemonGym';
 import {
   Model,
   Table,
@@ -10,47 +10,47 @@ import {
   UpdatedAt,
   BelongsTo,
   ForeignKey
-} from "sequelize-typescript";
-import { Trainner } from "./Trainner";
-import { Gym } from "./Gym";
-import { RaidTrainners } from "./RaidTrainners";
+} from 'sequelize-typescript';
+import { Trainner } from './Trainner';
+import { Gym } from './Gym';
+import { RaidTrainners } from './RaidTrainners';
 
 @Table
 export class ListRaid extends Model<ListRaid> {
   @Column({ allowNull: false })
-  maxTrainners: Number;
+  public maxTrainners: number;
 
   @Column({ allowNull: false })
-  timeToClose: Date;
+  public timeToClose: Date;
 
   @Column({ allowNull: false })
-  meetingTime: Date;
+  public meetingTime: Date;
 
   @ForeignKey(() => User)
   @Column({ allowNull: false })
-  userId: number;
+  public userId: number;
 
   @ForeignKey(() => PokemonGym)
   @Column({ allowNull: false })
-  pokemonGymId: number;
+  public pokemonGymId: number;
 
   @ForeignKey(() => Gym)
   @Column({ allowNull: false })
-  gymId: number;
+  public gymId: number;
 
   @BelongsTo(() => User)
-  user: User;
+  public user: User;
 
   @BelongsTo(() => PokemonGym)
-  pokemonGym: PokemonGym;
+  public pokemonGym: PokemonGym;
 
   @BelongsTo(() => Gym)
-  gym: Gym;
+  public gym: Gym;
 
   @HasMany(() => RaidTrainners)
-  raidTrainners: RaidTrainners[];
+  public raidTrainners: RaidTrainners[];
 
-  @CreatedAt createdAt: Date;
+  @CreatedAt public createdAt: Date;
 
-  @UpdatedAt updatedAt: Date;
+  @UpdatedAt public updatedAt: Date;
 }

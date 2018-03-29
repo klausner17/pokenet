@@ -1,4 +1,4 @@
-import { Pokemon } from "./Pokemon";
+import { Pokemon } from './Pokemon';
 import {
   Model,
   Table,
@@ -8,8 +8,8 @@ import {
   ForeignKey,
   CreatedAt,
   UpdatedAt
-} from "sequelize-typescript";
-import { Gym } from "./Gym";
+} from 'sequelize-typescript';
+import { Gym } from './Gym';
 
 export enum Level {
   oneStar = 0,
@@ -21,16 +21,16 @@ export enum Level {
 
 @Table
 export class PokemonGym extends Model<PokemonGym> {
-  @Column combatPower: number;
+  @Column public combatPower: number;
 
   @ForeignKey(() => Pokemon)
   @Column
-  pokemonId: number;
+  public pokemonId: number;
 
   @BelongsTo(() => Pokemon)
-  pokemon = Pokemon;
+  public pokemon = Pokemon;
 
-  @CreatedAt createdAt: Date;
+  @CreatedAt public createdAt: Date;
 
-  @UpdatedAt updatedAt: Date;
+  @UpdatedAt public updatedAt: Date;
 }

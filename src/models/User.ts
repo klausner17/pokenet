@@ -1,4 +1,4 @@
-import { ListRaid } from "./ListRaid";
+import { ListRaid } from './ListRaid';
 import {
   Table,
   Column,
@@ -9,41 +9,42 @@ import {
   AfterSave,
   BeforeCreate,
   Unique
-} from "sequelize-typescript";
-import { Trainner } from "./Trainner";
-import * as bcrypt from "bcrypt";
+} from 'sequelize-typescript';
+import { Trainner } from './Trainner';
+import * as bcrypt from 'bcrypt';
 
 @Table
 export class User extends Model<User> {
-  @Column({ allowNull: false })
-  name: string;
-
-  @Column({ unique: true, allowNull: false })
-  email: string;
-
-  @Column password: string;
-
-  @Column googleToken: string;
-
-  @HasMany(() => Trainner)
-  trainners: Trainner[];
-
-  @HasMany(() => ListRaid)
-  listRaid: ListRaid[];
-
-  @CreatedAt createdAt: Date;
-
-  @UpdatedAt updatedAt: Date;
 
   @BeforeCreate
-  static hashPassword(instance: User) {
+  public static hashPassword(instance: User) {
     if (instance.password) {
-      let salt = bcrypt.genSaltSync();
+      const salt = bcrypt.genSaltSync();
       instance.password = bcrypt.hashSync(instance.password, salt);
     }
   }
 
-  verifyPassword(pass: string): boolean {
+  @Column({ allowNull: false })
+  public name: string;
+
+  @Column({ unique: true, allowNull: false })
+  public email: string;
+
+  @Column public password: string;
+
+  @Column public googleToken: string;
+
+  @HasMany(() => Trainner)
+  public trainners: Trainner[];
+
+  @HasMany(() => ListRaid)
+  public listRaid: ListRaid[];
+
+  @CreatedAt public createdAt: Date;
+
+  @UpdatedAt public updatedAt: Date;
+
+  public verifyPassword(pass: string): boolean {
     return bcrypt.compareSync(pass, this.password);
   }
 }

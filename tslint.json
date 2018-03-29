@@ -5,7 +5,10 @@
     ],
     "jsRules": {},
     "rules": {
-        "quotemark": [true, "single"]
+        "quotemark": [true, "single"],
+        "ordered-imports": false,
+        "object-literal-shorthand": false,
+        "trailing-comma": false
     },
     "rulesDirectory": []
 }
