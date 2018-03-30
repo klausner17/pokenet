@@ -1,0 +1,46 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:9
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+      - paths:
+          - node_modules
+      - run: gulp scripts
+      - run: tar -cf dist.tar dist
+      - store_artifacts:
+          path: ~/repo/dist.tar
+  
+  tslint:
+    docker:
+      - image: circleci/node:9
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+      - run: mkdir -p tests-report/tslint
+      - run: yarn tslint --format junit -o tests-report/tslint/tslint.xml
+      - store_test_results:
+          path: tests-report
+
+workflows:
+  version: 2
+  build-then-test:
+    jobs:
+      - tslint
+      - build:
+          requires:
+            - tslint
