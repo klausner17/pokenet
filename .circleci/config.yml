@@ -13,6 +13,7 @@ jobs:
           key: v1-dependencies-{{ checksum "yarn.lock" }}
           paths:
           - node_modules
+      - run: yarn global add gulp
       - run: gulp scripts
       - run: gulp assets
       - run: tar -cf dist.tar dist
