@@ -37,6 +37,12 @@ jobs:
       - store_test_results:
           path: tests-report
 
+  deployment:
+    prod:
+      branch: master
+      commands:
+        - aws s3 sync ~/repo/dist.tar s3://circle-production-static-site/docs/ --delete
+
 workflows:
   version: 2
   build-then-test:
@@ -45,3 +51,6 @@ workflows:
       - build:
           requires:
             - tslint
+      - deployment:
+          requires:
+            -build
