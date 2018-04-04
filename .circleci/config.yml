@@ -53,4 +53,4 @@ workflows:
             - tslint
       - deployment:
           requires:
-            -build
+            - build
