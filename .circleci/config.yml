@@ -11,7 +11,7 @@ jobs:
       - run: yarn install
       - save_cache:
           key: v1-dependencies-{{ checksum "yarn.lock" }}
-      - paths:
+          paths:
           - node_modules
       - run: gulp scripts
       - run: gulp assets
