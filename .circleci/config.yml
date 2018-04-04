@@ -38,10 +38,9 @@ jobs:
           path: tests-report
 
   deployment:
-    prod:
-      branch: master
-      commands:
-        - aws s3 sync ~/repo/dist.tar s3://circle-production-static-site/docs/ --delete
+    branch: master
+    commands:
+      - aws s3 sync ~/repo/dist.tar s3://circle-production-static-site/docs/ --delete
 
 workflows:
   version: 2
