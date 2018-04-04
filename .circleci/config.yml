@@ -37,10 +37,16 @@ jobs:
       - store_test_results:
           path: tests-report
 
-  deployment:
-    branch: master
-    commands:
-      - aws s3 sync ~/repo/dist.tar s3://circle-production-static-site/docs/ --delete
+  deploy:
+    docker:
+      - image: circleci/node:9
+    working_directory: ~/repo
+    steps:
+      - attach_workspace:
+          at: .
+      - branch: master
+      - commands:
+        - aws s3 sync ~/repo/dist.tar s3://circle-production-static-site/docs/ --delete
 
 workflows:
   version: 2
@@ -50,6 +56,6 @@ workflows:
       - build:
           requires:
             - tslint
-      - deployment:
+      - deploy:
           requires:
             - build
