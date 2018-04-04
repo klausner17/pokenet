@@ -47,9 +47,5 @@
     "sequelize": "^4.22.5",
     "sequelize-typescript": "^0.5.0",
     "typescript": "^2.5.3"
-  },
-  "engines": {
-    "node": "9.0.0",
-    "npm": "5.5.1"
   }
 }
