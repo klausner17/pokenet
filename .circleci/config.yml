@@ -48,7 +48,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/repo/dist
-      - run: ls -al
+      - run: ls -al ./dist
 
 workflows:
   version: 2
