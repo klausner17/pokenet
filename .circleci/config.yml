@@ -17,9 +17,9 @@ jobs:
       - run: yarn build
       - run: tar -cf dist.tar dist
       - store_artifacts:
-          path: /tmp/dist.tar
+          path: dist.tar
       - persist_to_workspace:
-          root: dist
+          root: .
           paths:
             - dist.tar
   
