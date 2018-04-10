@@ -18,6 +18,10 @@ jobs:
       - run: tar -cf dist.tar dist
       - store_artifacts:
           path: /tmp/dist.tar
+      - persist_to_workspace:
+          root: dist
+          paths:
+            - dist.tar
   
   tslint:
     docker:
@@ -43,7 +47,7 @@ jobs:
     working_directory: ~/repo
     steps:
       - attach_workspace:
-          at: /tmp
+          at: ~/repo/dist
       - run: ls -al
 
 workflows:
