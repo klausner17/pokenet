@@ -41,15 +41,11 @@ jobs:
       - store_test_results:
           path: tests-report
 
-  deployment:
-    docker:
-      - image: circleci/node:9
-    working_directory: ~/repo
-    steps:
-      - attach_workspace:
-          at: ~/repo/dist
-      - run: ls -la
-      - run: aws s3 sync dist/dist.tar s3://pokenet/backend/ --delete
+deployment:
+  production:
+    branch: master
+    commands: 
+      - aws s3 sync dist/dist.tar s3://pokenet/backend/ --delete
 
 workflows:
   version: 2
@@ -59,6 +55,3 @@ workflows:
       - build:
           requires:
             - tslint
-      - deployment:
-          requires:
-            - build
