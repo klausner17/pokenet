@@ -48,9 +48,9 @@ jobs:
     steps:
       - attach_workspace:
             at: ~/repo/dist
-      - commands:
-        - ls -la
-        - aws s3 sync dist/dist.tar s3://pokenet/backend/ --delete
+    commands:
+      - ls -la
+      - aws s3 sync dist/dist.tar s3://pokenet/backend/ --delete
 
 workflows:
   version: 2
