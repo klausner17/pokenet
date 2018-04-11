@@ -50,7 +50,7 @@ jobs:
             at: ~/repo/dist
       - run:
         - ls -la
-        - command: aws s3 sync dist/dist.tar s3://pokenet/backend/ --delete
+        - aws s3 sync dist/dist.tar s3://pokenet/backend/ --delete
 
 workflows:
   version: 2
