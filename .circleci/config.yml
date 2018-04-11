@@ -46,10 +46,11 @@ jobs:
       - image: circleci/node:9
     working_directory: ~/repo
     steps:
-      - run: ls -la
       - attach_workspace:
-          at: ~/repo/dist
-      - command: aws s3 sync dist/dist.tar s3://pokenet/backend/ --delete
+            at: ~/repo/dist
+      - run:
+        - ls -la
+        - command: aws s3 sync dist/dist.tar s3://pokenet/backend/ --delete
 
 workflows:
   version: 2
