@@ -4,7 +4,7 @@
   "description": "Um projeto que tem como principio criar listas de reide de PokemonGO.",
   "main": "index.js",
   "scripts": {
-    "start": "gulp scripts && node ./dist/index.js",
+    "start": "gulp scripts && nodemon ./dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tslint": "tslint --project .",
     "build": "gulp build"
@@ -23,7 +23,6 @@
     "gulp": "^3.9.1",
     "gulp-typescript": "^3.2.2",
     "gulp-watch": "^4.3.11",
-    "http": "0.0.0",
     "tslint": "^5.9.1",
     "tslint-config-standard": "^7.0.0",
     "typescript": "^2.5.3"
@@ -33,6 +32,7 @@
     "body-parser": "^1.18.2",
     "consign": "^0.1.6",
     "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
     "express": "^4.16.1",
     "http": "0.0.0",
     "jwt-simple": "^0.5.1",
