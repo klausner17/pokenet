@@ -1,9 +1,9 @@
 import * as http from 'http';
-import * as debug from 'debug';
-import * as boot from './boot';
+import * as dotenv from 'dotenv';
+// tslint:disable-next-line:no-var-requires
+const config = require('./config');
+dotenv.config();
 import app from './App';
-
-const config: any = boot.default;
 
 const port = normalizePort(config.port);
 app.express.set('port', port);
@@ -35,6 +35,7 @@ function onError(error: NodeJS.ErrnoException): void {
 
 function onListening(): void {
   const addr = server.address();
-  const bind = typeof addr === 'string' ? 'pipe ${addr}' : 'port ${addr.port}';
-  debug('Listening on ${bind}');
+  const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
+  // tslint:disable-next-line:no-console
+  console.log(`Listening on ${bind}`);
 }

@@ -2,9 +2,9 @@ import { Router, Request, Response } from 'express';
 import * as express from 'express';
 import { User } from '../models/User';
 import * as jwt from 'jwt-simple';
-import * as file from '../boot';
 
-const config: any = file.default;
+// tslint:disable-next-line:no-var-requires
+const config: any = require('../config');
 
 const tokenRouter: Router = express.Router();
 

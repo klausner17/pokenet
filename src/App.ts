@@ -13,15 +13,13 @@ import auth from './middlewares/authentication';
 import tokenRouter from './routes/token';
 import trainnerRouter from './routes/trainner';
 import listRaidRouter from './routes/listRaid';
-import googleRouter from './routes/google';
 import * as cors from 'cors';
 import pokemonRouter from './routes/pokemon';
-import * as file from './boot';
 
 class App {
   public express: express.Application;
 
-  private config = file.default;
+  private config = require('./config');
 
   constructor() {
     this.express = express();
@@ -40,7 +38,6 @@ class App {
 
   private routes(): void {
     this.express.use(indexRoutes);
-    this.express.use(googleRouter);
     this.express.use(userRoutes);
     this.express.use(tokenRouter);
     this.express.use(trainnerRouter);
@@ -52,15 +49,7 @@ class App {
 
   private databaseConnect() {
     const dbConf = this.config.database;
-    const sequelize = new Sequelize(dbConf.connectionString);
-    // let sequelize = new Sequelize({
-    //   database: dbConf.database,
-    //   username: dbConf.user,
-    //   password: dbConf.password,
-    //   dialect: dbConf.dialect,
-    //   port: dbConf.port,
-    //   modelPaths: [__dirname + "/models"]
-    // })
+    const sequelize = new Sequelize(dbConf);
     sequelize.addModels([__dirname + '/models']);
     sequelize.sync();
   }
