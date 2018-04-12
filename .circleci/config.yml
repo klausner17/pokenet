@@ -48,7 +48,7 @@ jobs:
       # AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID  # Isso está definido nas configurações da build
       # AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY  # Isso está definido nas configurações da build
       AWS_DEFAULT_REGION: us-east-1  # Só mude se necessário
-      AWS_S3_BUCKET: pokenet  # Coloque o nome do bucket aqui
+      AWS_S3_BUCKET: pokenet/backend  # Coloque o nome do bucket aqui
     steps:
       - attach_workspace:
           at: .
