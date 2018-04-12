@@ -33,3 +33,4 @@ gulp.task('data', function() {
 
 gulp.task('default', ['watch', 'assets']);
 gulp.task('gulp-copy', ['data']);
+gulp.task('build', ['scripts', 'modules', 'assets'])

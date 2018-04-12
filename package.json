@@ -7,7 +7,7 @@
     "start": "gulp scripts && node ./dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tslint": "tslint --project .",
-    "build": "gulp scripts && gulp assets && gulp modules"
+    "build": "gulp build"
   },
   "author": "Klausner Augusto",
   "license": "ISC",
