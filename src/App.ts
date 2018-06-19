@@ -1,19 +1,17 @@
-import gymRouter from './routes/gym';
-import pokemonGymRouter from './routes/pokemonGym';
-import { User } from './models/User';
-import * as path from 'path';
 import * as express from 'express';
-import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 import { Sequelize } from 'sequelize-typescript';
-import * as fs from 'fs';
-import indexRoutes from './routes/index';
-import userRoutes from './routes/user';
+import * as cors from 'cors';
+
 import auth from './middlewares/authentication';
-import tokenRouter from './routes/token';
+
+import gymRouter from './routes/gym';
+import pokemonGymRouter from './routes/pokemonGym';
 import trainnerRouter from './routes/trainner';
 import listRaidRouter from './routes/listRaid';
-import * as cors from 'cors';
+import userRoutes from './routes/user';
+import indexRoutes from './routes/index';
+import tokenRouter from './routes/token';
 import pokemonRouter from './routes/pokemon';
 
 class App {
@@ -29,7 +27,6 @@ class App {
   }
 
   private middlewares(): void {
-    this.express.use(logger('dev'));
     this.express.use(bodyParser.json());
     this.express.use(cors());
     this.express.use(bodyParser.urlencoded({ extended: false }));
