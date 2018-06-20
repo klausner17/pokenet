@@ -11,7 +11,7 @@ module.exports = {
     database: process.env.DB_DATABASE,
     port: process.env.DB_PORT,
     logging: (sql) => {
-      logger.info(`[${Date.now}] - [SEQUELIZE] ${sql} `);
+      logger.info(`[${Date.now()}] - [SEQUELIZE] ${sql} `);
     },
     pool: {
       max: 5,

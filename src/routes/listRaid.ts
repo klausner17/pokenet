@@ -97,12 +97,22 @@ listRaidRouter
   .post((req: Request, res: Response) => {
     const userId: number = req.user.id;
     const trainnerId: number = req.params.idTrainner;
-    Trainner.findOne({ where: { userId: userId, id: trainnerId } }).then(
+    const options: IFindOptions = {
+      include: [{
+        model: User,
+        attributes: ['id', 'name']
+      }],
+      where: {
+        userId: userId,
+        id: trainnerId
+      }
+    };
+    Trainner.findOne(options).then(
       (result) => {
         if (result) {
           const raidTrainner: RaidTrainners = new RaidTrainners();
-          raidTrainner.trainnerId = trainnerId;
-          raidTrainner.raidId = req.params.id;
+          raidTrainner.trainnerId = +trainnerId;
+          raidTrainner.raidId = +req.params.id;
           raidTrainner
             .save()
             .then((trainner: RaidTrainners) => {

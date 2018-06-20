@@ -31,26 +31,6 @@ INSERT INTO Gym (id, createdAt, updatedAt, alias, name, latitude, longitude) VAL
 INSERT INTO Gym (id, createdAt, updatedAt, alias, name, latitude, longitude) VALUES (DEFAULT, NOW(), NOW(), "Skate", "Pista de Skate", "-22.0082021", "-47.9249077");
 INSERT INTO Gym (id, createdAt, updatedAt, alias, name, latitude, longitude) VALUES (DEFAULT, NOW(), NOW(), "Seu Madruga", "Seu Madruga", "-22.0082021", "-47.9249077");
 
-INSERT INTO Type (id, createdAt, updatedAt, type) VALUES (default, now(), now(), "normal");
-INSERT INTO Type (id, createdAt, updatedAt, type) VALUES (default, now(), now(), "fighting");
-INSERT INTO Type (id, createdAt, updatedAt, type) VALUES (default, now(), now(), "flying");
-INSERT INTO Type (id, createdAt, updatedAt, type) VALUES (default, now(), now(), "poison");
-INSERT INTO Type (id, createdAt, updatedAt, type) VALUES (default, now(), now(), "ground");
-INSERT INTO Type (id, createdAt, updatedAt, type) VALUES (default, now(), now(), "rock");
-INSERT INTO Type (id, createdAt, updatedAt, type) VALUES (default, now(), now(), "bug");
-INSERT INTO Type (id, createdAt, updatedAt, type) VALUES (default, now(), now(), "ghost");
-INSERT INTO Type (id, createdAt, updatedAt, type) VALUES (default, now(), now(), "steel");
-INSERT INTO Type (id, createdAt, updatedAt, type) VALUES (default, now(), now(), "fire");
-INSERT INTO Type (id, createdAt, updatedAt, type) VALUES (default, now(), now(), "water");
-INSERT INTO Type (id, createdAt, updatedAt, type) VALUES (default, now(), now(), "grass");
-INSERT INTO Type (id, createdAt, updatedAt, type) VALUES (default, now(), now(), "electric");
-INSERT INTO Type (id, createdAt, updatedAt, type) VALUES (default, now(), now(), "psychic");
-INSERT INTO Type (id, createdAt, updatedAt, type) VALUES (default, now(), now(), "ice");
-INSERT INTO Type (id, createdAt, updatedAt, type) VALUES (default, now(), now(), "dragon");
-INSERT INTO Type (id, createdAt, updatedAt, type) VALUES (default, now(), now(), "dark");
-INSERT INTO Type (id, createdAt, updatedAt, type) VALUES (default, now(), now(), "fairy");
-INSERT INTO Type (id, createdAt, updatedAt, type) VALUES (default, now(), now(), "unknown");
-INSERT INTO Type (id, createdAt, updatedAt, type) VALUES (default, now(), now(), "shadow");
 
 INSERT INTO Pokemon (id, createdAt, updatedAt, name) VALUES (default, now(), now(),"magikarp");
 INSERT INTO Pokemon (id, createdAt, updatedAt, name) VALUES (default, now(), now(),"bayleef");
