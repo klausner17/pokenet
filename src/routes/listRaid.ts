@@ -1,28 +1,23 @@
+import { Gym } from './../models/Gym';
+import { Pokemon } from './../models/Pokemon';
 import * as express from 'express';
 import { IFindOptions } from 'sequelize-typescript';
 import { Router, Request, Response } from 'express';
 import auth from '../middlewares/authentication';
-import { PokemonGym } from '../models/PokemonGym';
 import { RaidTrainners } from '../models/RaidTrainners';
-import { Gym } from '../models/Gym';
 import { ListRaid } from '../models/ListRaid';
 import { Trainner } from './../models/Trainner';
-import { Pokemon } from '../models/Pokemon';
 import { User } from '../models/User';
 
 const listRaidRouter: Router = express.Router();
 
 listRaidRouter.route('/listRaids').get((req: Request, res: Response) => {
   const date = new Date();
-  const options: any = {
-    include: [{
-      model: PokemonGym,
-      include: [{
-        model: Pokemon }]
-    }, {
-      model: Gym
-    }],
-    where: { meetingTime: { gte: date } }
+  const options: IFindOptions = {
+    include: [Pokemon, Gym],
+    where: {
+      mettingTime: { $gte: date }
+    }
   };
   ListRaid.findAll(options)
     .then((listRaids: ListRaid[]) => {
@@ -36,12 +31,8 @@ listRaidRouter.route('/listRaids/:id').get((req: Request, res: Response) => {
     attributes: ['id', 'maxTrainners', 'timeToClose', 'meetingTime'],
     include: [
       {
-        model: PokemonGym,
-        attributes: ['id', 'combatPower'],
-        include: [{
-          attributes: ['id', 'name'],
-          model: Pokemon
-        }]
+        model: Pokemon,
+        attributes: ['id', 'name'],
       },
       {
         model: Gym,

@@ -1,5 +1,5 @@
 import { User } from './User';
-import { PokemonGym } from './PokemonGym';
+import { Pokemon } from './Pokemon';
 import {
   Model,
   Table,
@@ -30,7 +30,7 @@ export class ListRaid extends Model<ListRaid> {
   @Column({ allowNull: false })
   public userId: number;
 
-  @ForeignKey(() => PokemonGym)
+  @ForeignKey(() => Pokemon)
   @Column({ allowNull: false })
   public pokemonGymId: number;
 
@@ -41,8 +41,8 @@ export class ListRaid extends Model<ListRaid> {
   @BelongsTo(() => User)
   public user: User;
 
-  @BelongsTo(() => PokemonGym)
-  public pokemonGym: PokemonGym;
+  @BelongsTo(() => Pokemon)
+  public pokemon: Pokemon;
 
   @BelongsTo(() => Gym)
   public gym: Gym;

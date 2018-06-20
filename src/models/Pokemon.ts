@@ -2,11 +2,9 @@ import {
   Model,
   Table,
   Column,
-  HasMany,
   CreatedAt,
   UpdatedAt
 } from 'sequelize-typescript';
-import { PokemonGym } from './PokemonGym';
 
 @Table
 export class Pokemon extends Model<Pokemon> {
