@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv';
+import { logger } from './utils/Logger';
 dotenv.config();
 
 module.exports = {
@@ -9,6 +10,9 @@ module.exports = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     port: process.env.DB_PORT,
+    logging: (sql) => {
+      logger.info(`[${Date.now}] - [SEQUELIZE] ${sql} `);
+    },
     pool: {
       max: 5,
       min: 0,
