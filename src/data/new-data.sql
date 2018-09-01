@@ -1,0 +1,20 @@
+-- ID, NAME, CPRAID, ACTIVERAID, RAIDLEVEL, CREATEDAT, UPDATEAT
+INSERT INTO Pokemon VALUES (DEFAULT, "wailmer", 3369, 1, 1, now(), now());
+INSERT INTO Pokemon VALUES (DEFAULT, "meditite", 2516, 1, 1, now(), now());
+INSERT INTO Pokemon VALUES (DEFAULT, "makuhita", 2319, 1, 1, now(), now());
+INSERT INTO Pokemon VALUES (DEFAULT, "magikarp", 1165, 1, 1, now(), now());
+INSERT INTO Pokemon VALUES (DEFAULT, "exeggutor de alola", 13671, 1, 2, now(), now());
+INSERT INTO Pokemon VALUES (DEFAULT, "roselia", 10887, 1, 2, now(), now());
+INSERT INTO Pokemon VALUES (DEFAULT, "mawile", 9403, 1, 2, now(), now());
+INSERT INTO Pokemon VALUES (DEFAULT, "kirlia", 6005, 1, 2, now(), now());
+INSERT INTO Pokemon VALUES (DEFAULT, "raichu de alola", 16178, 1, 3, now(), now());
+INSERT INTO Pokemon VALUES (DEFAULT, "donphan", 18980, 1, 3, now(), now());
+INSERT INTO Pokemon VALUES (DEFAULT, "piloswine", 13663, 1, 3, now(), now());
+INSERT INTO Pokemon VALUES (DEFAULT, "tangela", 16085, 1, 3, now(), now());
+INSERT INTO Pokemon VALUES (DEFAULT, "machamp", 18144, 1, 3, now(), now());
+INSERT INTO Pokemon VALUES (DEFAULT, "marowak de alola", 20190, 1, 4, now(), now());
+INSERT INTO Pokemon VALUES (DEFAULT, "absol", 26262, 1, 4, now(), now());
+INSERT INTO Pokemon VALUES (DEFAULT, "tyranitar", 34707, 1, 4, now(), now());
+INSERT INTO Pokemon VALUES (DEFAULT, "rhydon", 30512, 1, 4, now(), now());
+INSERT INTO Pokemon VALUES (DEFAULT, "mewtwo", 49430, 1, 5, now(), now());
+INSERT INTO Pokemon VALUES (DEFAULT, "regirock", 41777, 1, 5, now(), now());
