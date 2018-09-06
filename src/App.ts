@@ -6,7 +6,7 @@ import * as cors from 'cors';
 import auth from './middlewares/authentication';
 
 import gymRouter from './routes/gym';
-import trainnerRouter from './routes/trainner';
+import trainerRouter from './routes/trainer';
 import listRaidRouter from './routes/listRaid';
 import userRoutes from './routes/user';
 import indexRoutes from './routes/index';
@@ -36,7 +36,7 @@ class App {
     this.express.use(indexRoutes);
     this.express.use(userRoutes);
     this.express.use(tokenRouter);
-    this.express.use(trainnerRouter);
+    this.express.use(trainerRouter);
     this.express.use(listRaidRouter);
     this.express.use(pokemonRouter);
     this.express.use(gymRouter);

@@ -4,9 +4,9 @@ import * as express from 'express';
 import { IFindOptions } from 'sequelize-typescript';
 import { Router, Request, Response } from 'express';
 import auth from '../middlewares/authentication';
-import { RaidTrainners } from '../models/RaidTrainners';
+import { RaidTrainer } from '../models/RaidTrainer';
 import { ListRaid } from '../models/ListRaid';
-import { Trainner } from './../models/Trainner';
+import { Trainer } from '../models/Trainer';
 import { User } from '../models/User';
 
 const listRaidRouter: Router = express.Router();
@@ -39,9 +39,9 @@ listRaidRouter.route('/listRaids/:id').get((req: Request, res: Response) => {
         attributes: ['id', 'name', 'alias', 'latitude', 'longitude']
       },
       {
-        model: RaidTrainners,
+        model: RaidTrainer,
         include: [{
-          model: Trainner,
+          model: Trainer,
           attributes: ['id', 'name', 'level'],
           include: [{
             model: User,
@@ -107,15 +107,15 @@ listRaidRouter
         id: trainnerId
       }
     };
-    Trainner.findOne(options).then(
+    Trainer.findOne(options).then(
       (result) => {
         if (result) {
-          const raidTrainner: RaidTrainners = new RaidTrainners();
+          const raidTrainner: RaidTrainer = new RaidTrainer();
           raidTrainner.trainnerId = +trainnerId;
           raidTrainner.raidId = +req.params.id;
           raidTrainner
             .save()
-            .then((trainner: RaidTrainners) => {
+            .then((trainner: RaidTrainer) => {
               res.status(200).json(trainner);
             })
             .catch((error: Error) => {
@@ -133,10 +133,10 @@ listRaidRouter
     const options: IFindOptions = {
       where: { userId: userId, id: trainnerId }
     };
-    Trainner.findOne(options)
-      .then((result: Trainner) => {
+    Trainer.findOne(options)
+      .then((result: Trainer) => {
         if (result) {
-          RaidTrainners.destroy({
+          RaidTrainer.destroy({
             where: { raidId: req.params.id, trainnerId: trainnerId }
           })
             .then(() => {

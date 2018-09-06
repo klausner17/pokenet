@@ -11,9 +11,8 @@ import {
   BelongsTo,
   ForeignKey
 } from 'sequelize-typescript';
-import { Trainner } from './Trainner';
 import { Gym } from './Gym';
-import { RaidTrainners } from './RaidTrainners';
+import { RaidTrainer } from './RaidTrainer';
 
 @Table
 export class ListRaid extends Model<ListRaid> {
@@ -47,8 +46,8 @@ export class ListRaid extends Model<ListRaid> {
   @BelongsTo(() => Gym)
   public gym: Gym;
 
-  @HasMany(() => RaidTrainners)
-  public raidTrainners: RaidTrainners[];
+  @HasMany(() => RaidTrainer)
+  public raidTrainners: RaidTrainer[];
 
   @CreatedAt public createdAt: Date;
 

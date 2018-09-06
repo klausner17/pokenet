@@ -3,7 +3,7 @@ import * as express from 'express';
 import { IFindOptions } from 'sequelize-typescript';
 import { CountOptions } from 'sequelize-typescript/node_modules/@types/sequelize';
 import auth from '../middlewares/authentication';
-import { Trainner } from '../models/Trainner';
+import { Trainer } from '../models/Trainer';
 import { User } from '../models/User';
 
 const userRoutes: Router = express.Router();
@@ -42,7 +42,7 @@ userRoutes
     const options: IFindOptions = {
       attributes: ['id', 'name'],
       include: [{
-        model: Trainner,
+        model: Trainer,
         attributes: ['id', 'name', 'level'],
       }],
     };

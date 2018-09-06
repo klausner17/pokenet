@@ -10,7 +10,7 @@ import {
   BeforeCreate,
   Unique
 } from 'sequelize-typescript';
-import { Trainner } from './Trainner';
+import { Trainer } from './Trainer';
 import * as bcrypt from 'bcrypt';
 
 @Table
@@ -34,8 +34,8 @@ export class User extends Model<User> {
 
   @Column public googleToken: string;
 
-  @HasMany(() => Trainner)
-  public trainners: Trainner[];
+  @HasMany(() => Trainer)
+  public trainners: Trainer[];
 
   @HasMany(() => ListRaid)
   public listRaid: ListRaid[];
