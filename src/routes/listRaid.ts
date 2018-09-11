@@ -8,22 +8,21 @@ import { RaidTrainer } from '../models/RaidTrainer';
 import { ListRaid } from '../models/ListRaid';
 import { Trainer } from '../models/Trainer';
 import { User } from '../models/User';
+import { ListRaidService } from '../services/listRaid';
+import { logger } from '../utils/Logger';
 
 const listRaidRouter: Router = express.Router();
+const listRaidService = new ListRaidService();
 
 listRaidRouter.route('/listRaids').get((req: Request, res: Response) => {
-  const date = new Date();
-  const options: IFindOptions = {
-    include: [Pokemon, Gym],
-    where: {
-      mettingTime: { $gte: date }
-    }
-  };
-  ListRaid.findAll(options)
+  listRaidService.getAllActives()
     .then((listRaids: ListRaid[]) => {
       res.status(200).json(listRaids);
     })
-    .catch((err) => res.status(412).json({ msg: err.message }));
+    .catch((err) => {
+      logger.error(`[LISTRAID] ${err}`)
+      res.status(412).json({ msg: err.message })
+    });
 });
 
 listRaidRouter.route('/listRaids/:id').get((req: Request, res: Response) => {

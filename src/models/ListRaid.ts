@@ -3,7 +3,6 @@ import { Pokemon } from './Pokemon';
 import {
   Model,
   Table,
-  HasOne,
   Column,
   HasMany,
   CreatedAt,
